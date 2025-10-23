@@ -1,0 +1,60 @@
+# --- Dependencias y caches ---
+node_modules/
+# Vite
+node_modules/.vite/
+.vite/
+# Parcel/otros
+.parcel-cache/
+.cache/
+.temp/
+.tmp/
+.eslintcache
+.stylelintcache
+
+# --- Builds / artefactos ---
+dist/
+build/
+coverage/
+.vitest/
+test-results/
+playwright-report/
+cypress/videos/
+cypress/screenshots/
+
+# --- Logs ---
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- Variables de entorno ---
+.env
+.env.local
+.env.*.local
+# Mantén un ejemplo versionado
+!.env.example
+
+# --- SO / editores ---
+.DS_Store
+Thumbs.db
+# Vim/otros
+*.swp
+*.swo
+
+# IntelliJ/JetBrains
+.idea/
+*.iml
+
+# VS Code (permite compartir settings/extensiones si quieres)
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# --- Herramientas varias ---
+storybook-static/
+.out/
+
+# --- TypeScript ---
+*.tsbuildinfo
