@@ -8,29 +8,39 @@ const Header = () => {
 
 const Stats = (props) => {
 
-const total = props.good + props.neutral + props.bad
-const average = (props.good-props.bad)/total
-const positive = props.good / total
+  const total = props.good + props.neutral + props.bad
+  const average = (props.good - props.bad) / total
+  const positive = props.good / total
 
-  return (
-    <>
-      <h1>Statistics</h1>
-      <div>
-        <Review text="Good: " review={props.good} />
-        <br></br>
-        <Review text="Neutral: " review={props.neutral} />
-        <br></br>
-        <Review text="Bad: " review={props.bad} />
-      </div>
-      <div>
-        Total: {total}
-        <br></br>
-        Average: {average}
-        <br></br>
-        Positive: {positive}%
-      </div>
-    </>
-  )
+  if (total == 0) {
+    return (
+      <>
+        <h1>Statistics</h1>
+        <p>No feedback given yet</p>
+      </>
+    )
+  }
+  else {
+    return (
+      <>
+        <h1>Statistics</h1>
+        <div>
+          <Review text="Good: " review={props.good} />
+          <br></br>
+          <Review text="Neutral: " review={props.neutral} />
+          <br></br>
+          <Review text="Bad: " review={props.bad} />
+        </div>
+        <div>
+          Total: {total}
+          <br></br>
+          Average: {average}
+          <br></br>
+          Positive: {positive}%
+        </div>
+      </>
+    )
+  }
 }
 
 const Review = (props) => {
