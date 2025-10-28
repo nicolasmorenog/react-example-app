@@ -51,6 +51,13 @@ const Review = (props) => {
   )
 }
 
+const Button = (props) => {
+  return (
+    <button onClick={props.setReview}>
+      {props.text}
+    </button >
+  )
+}
 
 const App = () => {
   // guarda los clics de cada botón en su propio estado
@@ -61,9 +68,9 @@ const App = () => {
   return (
     <div>
       <Header />
-      <button onClick={() => setGood(good + 1)}>Good</button>
-      <button onClick={() => setNeutral(neutral + 1)}>Neutral</button>
-      <button onClick={() => setBad(bad + 1)}>Bad</button>
+      <Button setReview={() => setGood(good + 1)} text="Good" />
+      <Button setReview={() => setNeutral(neutral + 1)} text="Neutral" />
+      <Button setReview={() => setBad(bad + 1)} text="Bad" />
       <Stats good={good} neutral={neutral} bad={bad} />
     </div>
   )
