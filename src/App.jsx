@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 // Import de Layot y HomePage estático
-import Layout from './pages/Layout';
+import Layout from './Layout';
 import HomePage from './pages/HomePage';
 
 // Import del resto de páginas lazy
