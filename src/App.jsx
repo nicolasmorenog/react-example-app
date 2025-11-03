@@ -1,13 +1,17 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import Anecdotes from './pages/Anecdotes';
+
+// Import de Layot y HomePage estático
 import Layout from './pages/Layout';
-import Counter from './pages/Counter';
-import LeftRight from './pages/LeftRight';
-import ListaCompra from './pages/ListaCompra';
-import Part1 from './pages/Part1';
-import Unicafe from './pages/Unicafe';
 import HomePage from './pages/HomePage';
+
+// Import del resto de páginas lazy
+const Anecdotes = lazy(() => import('./pages/Anecdotes'));
+const Counter = lazy(() => import('./pages/Counter'));
+const LeftRight = lazy(() => import('./pages/LeftRight'));
+const ListaCompra = lazy(() => import('./pages/ListaCompra'));
+const Part1 = lazy(() => import('./pages/Part1'));
+const Unicafe = lazy(() => import('./pages/Unicafe'));
 
 function App() {
 
