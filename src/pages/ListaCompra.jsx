@@ -21,12 +21,12 @@ export function ItemList(props) {
 export function Item(props) {
     return (
         <div
-            style={{
-                backgroundColor: 'grey',
-                padding: 10,
-                margin: 16,
-                borderRadius: 5,
-            }}
+        // style={{
+        //     backgroundColor: 'grey',
+        //     padding: 10,
+        //     margin: 16,
+        //     borderRadius: 5,
+        // }}
         >
             <article>
                 <input type='checkbox'></input><label> {props.name}</label>
@@ -56,12 +56,12 @@ export function InputItem(props) {
     return (
         <>
             <input
-                style={{
-                    height: 20,
-                    margin: 12,
-                    borderWidth: 1,
-                    padding: 10,
-                }}
+                // style={{
+                //     height: 20,
+                //     margin: 12,
+                //     borderWidth: 1,
+                //     padding: 10,
+                // }}
                 type='text'
                 placeholder='Add a new item to the list'
                 onChange={handleChange}
@@ -90,12 +90,12 @@ function ListaCompra() {
     console.log('rendering App')
     return (
         <div
-            style={{
-                backgroundColor: "lightgreen",
-                fontFamily: "Sans-Serif"
-            }}
+            // style={{
+            //     backgroundColor: "green",
+            //     fontFamily: "Sans-Serif"
+            // }}
         >
-            <h4>Shopping list</h4>
+            <h4>Shopping List</h4>
             <div>
                 <InputItem setLista={setLista} />
                 <ItemList
