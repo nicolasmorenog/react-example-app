@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
-// Import de Layot y HomePage estático
+// Import de Layout y HomePage estático
 import Layout from './Layout';
 import HomePage from './pages/HomePage';
 
@@ -17,18 +17,22 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Layout />
-
-      <hr />
       <Suspense fallback={<div>Cargando proyecto...</div>}>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/anecdotes" element={<Anecdotes />} />
-          <Route path="/left-right" element={<LeftRight />} />
-          <Route path="/lista-compra" element={<ListaCompra />} />
-          <Route path="/part1" element={<Part1 />} />
-          <Route path="/counter" element={<Counter />} />
-          <Route path="/unicafe" element={<Unicafe />} />
+          <Route
+            path="/"
+            element={
+              <Layout />
+            }
+          >
+            <Route path="/" element={<HomePage />} />
+            <Route path="/anecdotes" element={<Anecdotes />} />
+            <Route path="/left-right" element={<LeftRight />} />
+            <Route path="/lista-compra" element={<ListaCompra />} />
+            <Route path="/part1" element={<Part1 />} />
+            <Route path="/counter" element={<Counter />} />
+            <Route path="/unicafe" element={<Unicafe />} />
+          </Route>
         </Routes>
       </Suspense>
     </BrowserRouter>

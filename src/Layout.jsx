@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { Outlet } from 'react-router-dom';
 
 const Layout = () => {
 
@@ -18,6 +19,8 @@ const Layout = () => {
                 <Link style={padding} to="counter">Counter</Link>
                 <Link style={padding} to="/unicafe">Unicafe</Link>
             </nav>
+            <hr />
+            <Outlet />
         </div >
     )
 }
