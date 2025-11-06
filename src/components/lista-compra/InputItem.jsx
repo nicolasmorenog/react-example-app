@@ -23,6 +23,12 @@ function InputItem({ setLista }) {
         setNewItem('')
     }
 
+    const handleKeyDown= (event) => {
+        if (event.key === 'Enter'){
+            onClick()
+        }
+    }
+
     return (
         <>
             <input
@@ -30,6 +36,7 @@ function InputItem({ setLista }) {
                 placeholder='Add a new item'
                 onChange={onChange}
                 value={newItem}
+                onKeyDown={handleKeyDown}
             />
             <button
                 style={{

@@ -35,6 +35,10 @@ function ListaCompra() {
     return (
         <div>
             <h2>Shopping List</h2>
+            <button onClick={() => setFiltro("pending") }>Show Pending</button>
+            <button onClick={() => setFiltro("completed") }>Show Completed</button>
+            <button onClick={() => setFiltro("all") }>Show All</button>
+            <button onClick={() => setLista([])}>Reset</button>
             <div>
                 <InputItem
                     setLista={setLista}
@@ -44,10 +48,6 @@ function ListaCompra() {
                     handleToggle={handleToggle}
                 />
             </div>
-            <button onClick={() => setFiltro("pending") }>Show Pending</button>
-            <button onClick={() => setFiltro("completed") }>Show Completed</button>
-            <button onClick={() => setFiltro("all") }>Show All</button>
-            <button onClick={() => setLista([])}>Reset</button>
         </div>
     )
 }
