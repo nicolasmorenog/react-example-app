@@ -70,12 +70,6 @@ export function InputItem({ setLista }) {
     return (
         <>
             <input
-                // style={{
-                //     height: 20,
-                //     margin: 12,
-                //     borderWidth: 1,
-                //     padding: 10,
-                // }}
                 type='text'
                 placeholder='Add a new item'
                 onChange={onChange}
@@ -100,33 +94,48 @@ export function InputItem({ setLista }) {
 
 function ListaCompra() {
     const [lista, setLista] = useState([])
-
+    const [filtro, setFiltro] = useState("all")
+    
     const handleToggle = (id) => {
         const nuevaLista = lista.map(item => {
             if (item.id === id) {
                 return { ...item, isChecked: !item.isChecked }
             }
-            else return item
+            else {return item}
         })
-
+        
         setLista(nuevaLista)
-        console.log(nuevaLista) //cada objeto se muestra como {...}
+        console.table(nuevaLista)
     }
+    
+    
+
+        let filteredList
+
+        if (filtro === "pending") {
+            filteredList = lista.filter(item => !item.isChecked)
+        } else if (filtro === "completed") {
+            filteredList = lista.filter(item => item.isChecked)
+        } else {
+            filteredList = lista
+        }
+
+
     return (
         <div>
-            <h4>Shopping List</h4>
+            <h2>Shopping List</h2>
             <div>
                 <InputItem
                     setLista={setLista}
                 />
                 <ItemList
-                    lista={lista}
+                    lista={filteredList}
                     handleToggle={handleToggle}
                 />
             </div>
-            <button>Show Pending</button>
-            <button>Show Completed</button>
-            <button>Show All</button>
+            <button onClick={() => setFiltro("pending") }>Show Pending</button>
+            <button onClick={() => setFiltro("completed") }>Show Completed</button>
+            <button onClick={() => setFiltro("all") }>Show All</button>
             <button onClick={() => setLista([])}>Reset</button>
         </div>
     )
