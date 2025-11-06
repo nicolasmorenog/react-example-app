@@ -1,14 +1,39 @@
 import { useState } from "react"
 
-export function ItemList(props) {
-    console.log(props)
+
+export function Item({ name, isChecked, handleToggle }) {
+    return (
+        <div
+            style={{
+                backgroundColor: 'grey',
+                padding: 10,
+                margin: 16,
+                borderRadius: 5,
+            }}
+        >
+            <article>
+                <input
+                    type='checkbox'
+                    checked={isChecked}
+                    onChange={handleToggle}
+                ></input>
+                <label> {name}</label>
+            </article>
+        </div>
+    )
+}
+
+
+export function ItemList({ lista, handleToggle }) {
     return (
         <>
             <ul>
-                {props.lista.map((item, index) => (
+                {lista.map((item) => (
                     <Item
-                        name={item}
-                        id={index}
+                        key={item.id}
+                        name={item.name}
+                        isChecked={item.isChecked}
+                        handleToggle={() => handleToggle(item.id)}
                     />
                 )
                 )}
@@ -18,38 +43,27 @@ export function ItemList(props) {
 }
 
 
-export function Item(props) {
-    return (
-        <div
-        // style={{
-        //     backgroundColor: 'grey',
-        //     padding: 10,
-        //     margin: 16,
-        //     borderRadius: 5,
-        // }}
-        >
-            <article>
-                <input type='checkbox'></input><label> {props.name}</label>
-            </article>
-        </div>
-    )
-}
 
-
-
-
-export function InputItem(props) {
+export function InputItem({ setLista }) {
 
     const [newItem, setNewItem] = useState('')
 
-
-    const handleChange = (event) => {
+    const onChange = (event) => {
         setNewItem(event.target.value)
     }
 
-    const handleClick = (event) => {
-        console.log('click', newItem)
-        props.setLista(prev => [...prev, newItem])
+    const onClick = (event) => {
+        console.log(newItem, "was added to the list")
+
+        const newItemObject = {
+            name: newItem,
+            isChecked: false,
+            id: crypto.randomUUID()
+        }
+
+        console.log("New added item: ", newItemObject)
+
+        setLista(prev => [...prev, newItemObject])
         setNewItem('')
     }
 
@@ -63,8 +77,8 @@ export function InputItem(props) {
                 //     padding: 10,
                 // }}
                 type='text'
-                placeholder='Add a new item to the list'
-                onChange={handleChange}
+                placeholder='Add a new item'
+                onChange={onChange}
                 value={newItem}
             />
             <button
@@ -75,7 +89,7 @@ export function InputItem(props) {
                     borderWidth: 1,
                     padding: 10,
                 }}
-                onClick={handleClick}
+                onClick={onClick}
             >+</button>
 
 
@@ -87,22 +101,32 @@ export function InputItem(props) {
 function ListaCompra() {
     const [lista, setLista] = useState([])
 
-    console.log('rendering App')
+    const handleToggle = (id) => {
+        const nuevaLista = lista.map(item => {
+            if (item.id === id) {
+                return { ...item, isChecked: !item.isChecked }
+            }
+            else return item
+        })
+
+        setLista(nuevaLista)
+        console.log(nuevaLista) //cada objeto se muestra como {...}
+    }
     return (
-        <div
-            // style={{
-            //     backgroundColor: "green",
-            //     fontFamily: "Sans-Serif"
-            // }}
-        >
+        <div>
             <h4>Shopping List</h4>
             <div>
-                <InputItem setLista={setLista} />
+                <InputItem
+                    setLista={setLista}
+                />
                 <ItemList
-                    nombre='Compra del mes'
                     lista={lista}
+                    handleToggle={handleToggle}
                 />
             </div>
+            <button>Show Pending</button>
+            <button>Show Completed</button>
+            <button>Show All</button>
             <button onClick={() => setLista([])}>Reset</button>
         </div>
     )
