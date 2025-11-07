@@ -11,9 +11,14 @@ function InputItem({ setLista }) {
     const onClick = (event) => {
         console.log(newItem, "was added to the list")
 
+        const now = new Date().toString()
+
         const newItemObject = {
             name: newItem,
             isChecked: false,
+            createdAt: now,
+            //updatedAt: now,
+            completedAt: null,
             id: crypto.randomUUID()
         }
 
@@ -23,8 +28,8 @@ function InputItem({ setLista }) {
         setNewItem('')
     }
 
-    const handleKeyDown= (event) => {
-        if (event.key === 'Enter'){
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
             onClick()
         }
     }
