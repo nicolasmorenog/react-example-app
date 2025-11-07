@@ -13,9 +13,9 @@ function ListaCompra() {
         const nuevaLista = lista.map(item => {
             if (item.id === id) {
                 if (item.completedAt === null) {
-                    return { ...item, isChecked: !item.isChecked, completedAt: now }
+                    return { ...item, isChecked: !item.isChecked, updatedAt: now, completedAt: now }
                 }
-                else { return { ...item, isChecked: !item.isChecked, completedAt: null } }
+                else { return { ...item, isChecked: !item.isChecked, updatedAt: now, completedAt: null } }
             }
             else { return item }
         })

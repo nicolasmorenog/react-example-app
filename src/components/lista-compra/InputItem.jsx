@@ -17,7 +17,7 @@ function InputItem({ setLista }) {
             name: newItem,
             isChecked: false,
             createdAt: now,
-            //updatedAt: now,
+            updatedAt: now,
             completedAt: null,
             id: crypto.randomUUID()
         }
