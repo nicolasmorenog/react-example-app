@@ -11,7 +11,7 @@ function InputItem({ setLista }) {
     const onClick = (event) => {
         console.log(newItem, "was added to the list")
 
-        const now = new Date().toString()
+        const now = new Date().toLocaleString()
 
         const newItemObject = {
             name: newItem,
@@ -33,6 +33,7 @@ function InputItem({ setLista }) {
             onClick()
         }
     }
+    
 
     return (
         <>
@@ -53,6 +54,7 @@ function InputItem({ setLista }) {
                 }}
                 onClick={onClick}
             >+</button>
+            
 
 
         </>

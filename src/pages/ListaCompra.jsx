@@ -28,7 +28,8 @@ function ListaCompra() {
     useEffect(() => {
         const valueToSave = JSON.stringify(lista)
         localStorage.setItem(LOCAL_STORAGE_KEY, valueToSave)
-        console.log("Lista guardada: ", valueToSave)
+        console.log("LISTA GUARDADA: ")
+        console.table(lista)
 
     }, [lista])
 
@@ -36,7 +37,7 @@ function ListaCompra() {
     const [filtro, setFiltro] = useState("all")
 
     const handleToggle = (id) => {
-        const now = new Date().toString()
+        const now = new Date().toLocaleString()
 
         const nuevaLista = lista.map(item => {
             if (item.id === id) {
@@ -64,7 +65,6 @@ function ListaCompra() {
         filteredList = lista
     }
 
-
     return (
         <div>
             <h2>Shopping List</h2>
@@ -81,6 +81,7 @@ function ListaCompra() {
                     handleToggle={handleToggle}
                 />
             </div>
+
         </div>
     )
 }

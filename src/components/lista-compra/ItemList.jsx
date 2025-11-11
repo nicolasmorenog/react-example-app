@@ -7,9 +7,11 @@ function ItemList({ lista, handleToggle }) {
                 {lista.map((item) => (
                     <Item
                         key={item.id}
+                        id={item.id}
                         name={item.name}
                         isChecked={item.isChecked}
                         handleToggle={() => handleToggle(item.id)}
+                        lista={lista}
                     />
                 )
                 )}
