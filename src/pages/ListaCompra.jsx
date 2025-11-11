@@ -1,10 +1,38 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 import InputItem from "../components/lista-compra/InputItem"
 import ItemList from "../components/lista-compra/ItemList"
 
+const LOCAL_STORAGE_KEY = 'miApp.listaCompra'
+
 function ListaCompra() {
-    const [lista, setLista] = useState([])
+
+    //Leer localStorage
+    const [lista, setLista] = useState(() => {
+        const savedValue = localStorage.getItem(LOCAL_STORAGE_KEY)
+
+        if (savedValue === null) {
+            return []
+        }
+
+        try {
+            return JSON.parse(savedValue)
+        }
+        catch (error) {
+            console.error("Error: ", error)
+            return []
+        }
+    })
+
+    //Guardar localStorage
+    useEffect(() => {
+        const valueToSave = JSON.stringify(lista)
+        localStorage.setItem(LOCAL_STORAGE_KEY, valueToSave)
+        console.log("Lista guardada: ", valueToSave)
+
+    }, [lista])
+
+
     const [filtro, setFiltro] = useState("all")
 
     const handleToggle = (id) => {
