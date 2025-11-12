@@ -53,8 +53,6 @@ function ListaCompra() {
         console.table(nuevaLista)
     }
 
-
-
     let filteredList
 
     if (filtro === "pending") {
@@ -63,6 +61,11 @@ function ListaCompra() {
         filteredList = lista.filter(item => item.isChecked)
     } else {
         filteredList = lista
+    }
+
+    const handleDelete = (id) => {
+        const nuevaLista = lista.filter((item) => item.id !== id)
+        setLista(nuevaLista)
     }
 
     return (
@@ -79,6 +82,7 @@ function ListaCompra() {
                 <ItemList
                     lista={filteredList}
                     handleToggle={handleToggle}
+                    handleDelete={handleDelete}
                 />
             </div>
 
