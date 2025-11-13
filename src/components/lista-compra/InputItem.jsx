@@ -1,4 +1,5 @@
 import { useState } from "react"
+import InputBox from "./InputBox"
 
 function InputItem({ setLista }) {
 
@@ -33,17 +34,15 @@ function InputItem({ setLista }) {
             onClick()
         }
     }
-    
+
 
     return (
         <>
-            <input
-                type='text'
-                placeholder='Add a new item'
+            <InputBox
+                text='Add a new item'
                 onChange={onChange}
                 value={newItem}
-                onKeyDown={handleKeyDown}
-            />
+                onKeyDown={handleKeyDown} />
             <button
                 style={{
                     height: 40,
@@ -54,7 +53,7 @@ function InputItem({ setLista }) {
                 }}
                 onClick={onClick}
             >+</button>
-            
+
 
 
         </>

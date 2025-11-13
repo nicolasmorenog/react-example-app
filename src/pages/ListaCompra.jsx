@@ -63,6 +63,20 @@ function ListaCompra() {
         filteredList = lista
     }
 
+    const handleEdit = (id, newName) => {
+        const now = new Date().toLocaleString()
+
+        const nuevaLista = lista.map(item => {
+            if (item.id === id) {
+                console.log('Item', item.name, 'editado a', newName)
+                return { ...item, name: newName, updateAt: now }
+            } else { return item }
+        })
+
+        setLista(nuevaLista)
+        
+    }
+
     const handleDelete = (id) => {
         const nuevaLista = lista.filter((item) => item.id !== id)
         setLista(nuevaLista)
@@ -82,6 +96,7 @@ function ListaCompra() {
                 <ItemList
                     lista={filteredList}
                     handleToggle={handleToggle}
+                    handleEdit={handleEdit}
                     handleDelete={handleDelete}
                 />
             </div>

@@ -1,13 +1,31 @@
 
 import { useState } from 'react'
+import InputBox from './InputBox'
 
-function Item({ id, name, isChecked, handleToggle, lista, handleDelete }) {
+function Item({ id, name, isChecked, handleToggle, lista, handleDelete, handleEdit }) {
     const [showDetails, setShowDetails] = useState(false)
+    const [showEditItem, setShowEditItem] = useState(false)
+    const [editText, setEditText] = useState('')
 
     const item = lista.find(item => item.id === id)
 
     const handleShow = () => {
         setShowDetails(!showDetails)
+    }
+
+    const handleShowEdit = () => {
+        setShowEditItem(!showEditItem)
+    }
+
+    const handleEditKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            handleEdit (id, editText)
+            setShowEditItem(false)
+        }
+    }
+
+    const onChange = (event) => {
+        setEditText(event.target.value)
     }
 
     return (
@@ -25,7 +43,17 @@ function Item({ id, name, isChecked, handleToggle, lista, handleDelete }) {
                     checked={isChecked}
                     onChange={handleToggle}
                 ></input>
-                <label> {name}</label>
+                {showEditItem && item && (
+                <div>
+                    <InputBox
+                        text={item.name}
+                        onChange={onChange}
+                        value={editText}
+                        onKeyDown={handleEditKeyDown}
+                    />
+                </div>
+            )}
+                {!showEditItem && item && <label> {name}</label>}
                 <button onClick={handleShow}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +72,7 @@ function Item({ id, name, isChecked, handleToggle, lista, handleDelete }) {
                     </svg>
                 </button>
                 <button
-                //onClick={handleEdit}
+                    onClick={handleShowEdit}
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
