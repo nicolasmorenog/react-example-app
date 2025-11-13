@@ -9,7 +9,6 @@ function ItemList({ lista, handleToggle, handleEdit, handleDelete }) {
                         key={item.id}
                         id={item.id}
                         name={item.name}
-                        isChecked={item.isChecked}
                         handleToggle={() => handleToggle(item.id)}
                         handleEdit={handleEdit}
                         handleDelete={handleDelete}

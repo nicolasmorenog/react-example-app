@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import InputBox from './InputBox'
 
-function Item({ id, name, isChecked, handleToggle, lista, handleDelete, handleEdit }) {
+function Item({ id, name, handleToggle, lista, handleDelete, handleEdit }) {
     const [showDetails, setShowDetails] = useState(false)
     const [showEditItem, setShowEditItem] = useState(false)
     const [editText, setEditText] = useState('')
@@ -40,7 +40,6 @@ function Item({ id, name, isChecked, handleToggle, lista, handleDelete, handleEd
             <article>
                 <input
                     type='checkbox'
-                    checked={isChecked}
                     onChange={handleToggle}
                 ></input>
                 {showEditItem && item && (
@@ -111,7 +110,7 @@ function Item({ id, name, isChecked, handleToggle, lista, handleDelete, handleEd
             {showDetails && item && (
                 <div>
                     <p>Name: {item.name}</p>
-                    <p>Completed: {item.isChecked ? 'Yes' : 'No'}</p>
+                    <p>Completed: {item.completedAt === null ? 'No' : 'Yes'}</p>
                     {item.createdAt && <p>Created: {new Date(item.createdAt).toLocaleString()}</p>}
                     {item.updatedAt && <p>Updated: {new Date(item.updatedAt).toLocaleString()}</p>}
                 </div>

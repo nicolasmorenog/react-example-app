@@ -16,7 +16,6 @@ function InputItem({ setLista }) {
 
         const newItemObject = {
             name: newItem,
-            isChecked: false,
             createdAt: now,
             updatedAt: now,
             completedAt: null,
