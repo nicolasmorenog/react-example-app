@@ -33,7 +33,6 @@ function ListaCompra() {
 
     }, [lista])
 
-
     const [filtro, setFiltro] = useState("all")
 
     const handleToggle = (id) => {
@@ -68,7 +67,7 @@ function ListaCompra() {
 
         const nuevaLista = lista.map(item => {
             if (item.id === id) {
-                console.log('Item', item.name, 'editado a', newName)
+                console.log('Item:', item.name, '-->', newName)
                 return { ...item, name: newName, updateAt: now }
             } else { return item }
         })
