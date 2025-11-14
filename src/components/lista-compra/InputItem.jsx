@@ -12,7 +12,7 @@ function InputItem({ setLista }) {
     const onClick = (event) => {
         console.log(newItem, "was added to the list")
 
-        const now = new Date().toLocaleString()
+        const now = new Date().toISOString()
 
         const newItemObject = {
             name: newItem,

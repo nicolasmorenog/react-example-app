@@ -36,7 +36,7 @@ function ListaCompra() {
     const [filtro, setFiltro] = useState("all")
 
     const handleToggle = (id) => {
-        const now = new Date().toLocaleString()
+        const now = new Date().toISOString()
 
         const nuevaLista = lista.map(item => {
             if (item.id === id) {
