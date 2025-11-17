@@ -73,7 +73,7 @@ function ListaCompra() {
         })
 
         setLista(nuevaLista)
-        
+
     }
 
     const handleDelete = (id) => {
@@ -84,14 +84,34 @@ function ListaCompra() {
     return (
         <div>
             <h2>Shopping List</h2>
-            <button onClick={() => setFiltro("pending")}>Show Pending</button>
-            <button onClick={() => setFiltro("completed")}>Show Completed</button>
-            <button onClick={() => setFiltro("all")}>Show All</button>
-            <button onClick={() => setLista([])}>Reset</button>
             <div>
                 <InputItem
                     setLista={setLista}
                 />
+            </div>
+            <div>
+                <button
+                    className={`filter-button${filtro === "all" ? "" : "active-button"}`}
+                    onClick={() => setFiltro("all")}>
+                    All
+                </button>
+                <button
+                    className={`filter-button${filtro === "pending" ? "" : "active-button"}`}
+                    onClick={() => setFiltro("pending")}>
+                    Pending
+                </button>
+                <button
+                    className={`filter-button${filtro === "completed" ? "" : "active-button"}`}
+                    onClick={() => setFiltro("completed")}>
+                    Completed
+                </button>
+                <button
+                    className="reset-button"
+                    onClick={() => setLista([])}>
+                    Reset
+                </button>
+            </div>
+            <div>
                 <ItemList
                     lista={filteredList}
                     handleToggle={handleToggle}
@@ -100,7 +120,7 @@ function ListaCompra() {
                 />
             </div>
 
-        </div>
+        </div >
     )
 }
 

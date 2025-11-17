@@ -43,15 +43,16 @@ function InputItem({ setLista }) {
                 value={newItem}
                 onKeyDown={handleKeyDown} />
             <button
-                style={{
-                    height: 40,
-                    width: 40,
-                    margin: 12,
-                    borderWidth: 1,
-                    padding: 10,
-                }}
+                className="add-button"
+                // style={{
+                //     height: 40,
+                //     width: 40,
+                //     margin: 12,
+                //     borderWidth: 1,
+                //     padding: 10,
+                // }}
                 onClick={onClick}
-            >+</button>
+            >+ Add</button>
 
 
 
