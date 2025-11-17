@@ -1,16 +1,22 @@
-
 import { useState } from 'react'
-import InputBox from './InputBox'
+import { useParams, useNavigate } from 'react-router-dom'
 
-function Item({ id, name, handleToggle, lista, handleDelete, handleEdit }) {
-    const [showDetails, setShowDetails] = useState(false)
+function Item({ item, handleToggle, handleDelete, handleEdit }) {
+    const { id: itemId } = useParams();
+    const [showDetails, setShowDetails] = useState(itemId === item.id)
     const [showEditItem, setShowEditItem] = useState(false)
-    const [editText, setEditText] = useState('')
 
-    const item = lista.find(item => item.id === id)
+    const [editText, setEditText] = useState(item.name ?? '')
+
+    const navigate = useNavigate();
+
 
     const handleShow = () => {
         setShowDetails(!showDetails)
+        if (showDetails === false){
+            navigate(`/lista-compra/${item.id}`)
+        }
+        else navigate('/lista-compra')
     }
 
     const handleShowEdit = () => {
@@ -19,7 +25,7 @@ function Item({ id, name, handleToggle, lista, handleDelete, handleEdit }) {
 
     const handleEditKeyDown = (event) => {
         if (event.key === 'Enter') {
-            handleEdit (id, editText)
+            handleEdit(item.id, editText)
             setShowEditItem(false)
         }
     }
@@ -41,18 +47,20 @@ function Item({ id, name, handleToggle, lista, handleDelete, handleEdit }) {
                 <input
                     type='checkbox'
                     onChange={handleToggle}
+                    checked={item.completedAt !== null}
                 ></input>
                 {showEditItem && item && (
-                <div>
-                    <InputBox
-                        text={item.name}
-                        onChange={onChange}
-                        value={editText}
-                        onKeyDown={handleEditKeyDown}
-                    />
-                </div>
-            )}
-                {!showEditItem && item && <label> {name}</label>}
+                    <div>
+                        <input
+                            type='text'
+                            placeholder={item.name}
+                            onChange={onChange}
+                            value={editText}
+                            onKeyDown={handleEditKeyDown}
+                        />
+                    </div>
+                )}
+                {!showEditItem && item && <label> {item.name}</label>}
                 <button onClick={handleShow}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -89,7 +97,7 @@ function Item({ id, name, handleToggle, lista, handleDelete, handleEdit }) {
                         <path d="M13.5 6.5l4 4" />
                     </svg>
                 </button>
-                <button onClick={() => handleDelete(id)}>
+                <button onClick={() => handleDelete(item.id)}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width={24} height={24}

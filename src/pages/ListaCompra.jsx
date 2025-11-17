@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react"
+import { useParams } from 'react-router-dom'
 
 import InputItem from "../components/lista-compra/InputItem"
 import ItemList from "../components/lista-compra/ItemList"
 
+
 const LOCAL_STORAGE_KEY = 'miApp.listaCompra'
 
 function ListaCompra() {
-
+    
+    
     //Leer localStorage
     const [lista, setLista] = useState(() => {
         const savedValue = localStorage.getItem(LOCAL_STORAGE_KEY)
@@ -55,15 +58,15 @@ function ListaCompra() {
     let filteredList
 
     if (filtro === "pending") {
-        filteredList = lista.filter(item => item.completedAt !== null)
-    } else if (filtro === "completed") {
         filteredList = lista.filter(item => item.completedAt === null)
+    } else if (filtro === "completed") {
+        filteredList = lista.filter(item => item.completedAt !== null)
     } else {
         filteredList = lista
     }
 
     const handleEdit = (id, newName) => {
-        const now = new Date().toLocaleString()
+        const now = new Date()
 
         const nuevaLista = lista.map(item => {
             if (item.id === id) {
