@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
-import { useParams } from 'react-router-dom'
+//import { useParams } from 'react-router-dom'
+import { Toaster, toast } from "sonner"
 
 import InputItem from "../components/lista-compra/InputItem"
 import ItemList from "../components/lista-compra/ItemList"
@@ -8,8 +9,8 @@ import ItemList from "../components/lista-compra/ItemList"
 const LOCAL_STORAGE_KEY = 'miApp.listaCompra'
 
 function ListaCompra() {
-    
-    
+
+
     //Leer localStorage
     const [lista, setLista] = useState(() => {
         const savedValue = localStorage.getItem(LOCAL_STORAGE_KEY)
@@ -82,11 +83,35 @@ function ListaCompra() {
 
     const handleDelete = (id) => {
         const nuevaLista = lista.filter((item) => item.id !== id)
+        const anteriorLista = [...lista]
         setLista(nuevaLista)
+
+        toast.success('Item has been deleted', {
+            action: {
+                label: 'Undo',
+                onClick: () => setLista(anteriorLista)
+            }
+        })
+    }
+
+    const handleReset = () => {
+        const anteriorLista = [...lista]
+        setLista([])
+
+        toast.success('All your items were cleared', {
+            action: {
+                label: 'Undo',
+                onClick: () => setLista(anteriorLista)
+            }
+        })
     }
 
     return (
         <div>
+            <Toaster 
+            position="bottom-right" 
+            richColors
+            />
             <h2>Shopping List</h2>
             <div>
                 <InputItem
@@ -111,7 +136,7 @@ function ListaCompra() {
                 </button>
                 <button
                     className="reset-button"
-                    onClick={() => setLista([])}>
+                    onClick={handleReset}>
                     Reset
                 </button>
             </div>

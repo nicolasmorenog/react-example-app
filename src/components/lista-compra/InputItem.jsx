@@ -12,7 +12,7 @@ function InputItem({ setLista }) {
         console.log(newItem, "was added to the list")
 
         const now = new Date().toISOString()
-
+        
         const newItemObject = {
             name: newItem,
             createdAt: now,
