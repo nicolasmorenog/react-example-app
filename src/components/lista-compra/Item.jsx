@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 
-function Item({ item, handleToggle, handleDelete, handleEdit }) {
+function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, setSelectedItemId }) {
     const { id: itemId } = useParams();
-    const [showDetails, setShowDetails] = useState(itemId === item.id)
     const [showEditItem, setShowEditItem] = useState(false)
 
     const [editText, setEditText] = useState(item.name ?? '')
@@ -12,11 +11,15 @@ function Item({ item, handleToggle, handleDelete, handleEdit }) {
 
 
     const handleShow = () => {
-        setShowDetails(!showDetails)
-        if (showDetails === false){
+        if (selectedItemId === item.id) {
+            //Si está abierto se cierra
+            setSelectedItemId(null)
+            navigate('/lista-compra')
+        } else {
+            //Si está cerrado se abre
+            setSelectedItemId(item.id)
             navigate(`/lista-compra/${item.id}`)
         }
-        else navigate('/lista-compra')
     }
 
     const handleShowEdit = () => {
@@ -115,12 +118,11 @@ function Item({ item, handleToggle, handleDelete, handleEdit }) {
                     </svg>
                 </button>
             </article>
-            {showDetails && item && (
+            {selectedItemId === item.id && (
                 <div>
-                    <p>Name: {item.name}</p>
-                    <p>Completed: {item.completedAt === null ? 'No' : 'Yes'}</p>
                     {item.createdAt && <p>Created: {new Date(item.createdAt).toLocaleString()}</p>}
                     {item.updatedAt && <p>Updated: {new Date(item.updatedAt).toLocaleString()}</p>}
+                    <p>Status: {item.completedAt === null ? 'Pending' : 'Completed'}</p>
                 </div>
             )}
         </div>

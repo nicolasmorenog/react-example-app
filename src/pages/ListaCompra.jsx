@@ -37,6 +37,7 @@ function ListaCompra() {
     }, [lista])
 
     const [filtro, setFiltro] = useState("all")
+    const [selectedItemId, setSelectedItemId] = useState(null)
 
     const handleToggle = (id) => {
         const now = new Date().toISOString()
@@ -120,6 +121,8 @@ function ListaCompra() {
                     handleToggle={handleToggle}
                     handleEdit={handleEdit}
                     handleDelete={handleDelete}
+                    selectedItemId={selectedItemId}
+                    setSelectedItemId={setSelectedItemId}
                 />
             </div>
 
