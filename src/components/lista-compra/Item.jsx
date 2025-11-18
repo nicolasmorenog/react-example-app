@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 
 function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, setSelectedItemId }) {
-    const { id: itemId } = useParams();
+    //const { id: itemId } = useParams();
     const [showEditItem, setShowEditItem] = useState(false)
 
     const [editText, setEditText] = useState(item.name ?? '')
