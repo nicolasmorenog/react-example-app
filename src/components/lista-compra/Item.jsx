@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
-import { IconTrash, IconPencil, IconEye } from '@tabler/icons-react'
+import { IconTrash, IconPencil, IconEye, IconEyeClosed } from '@tabler/icons-react'
 
 function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, setSelectedItemId }) {
     //const { id: itemId } = useParams();
@@ -49,14 +49,7 @@ function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, se
     }
 
     return (
-        <div
-            style={{
-                backgroundColor: 'grey',
-                padding: 10,
-                margin: 16,
-                borderRadius: 5,
-            }}
-        >
+        <div>
             <article>
                 <input
                     type='checkbox'
@@ -81,15 +74,19 @@ function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, se
                     </div>
                 )}
                 {!showEditItem && item && <label> {item.name}</label>}
-                <button onClick={handleShow}>
-                    <IconEye stroke={2} />
+                <button
+                    className="item-button"
+                    onClick={handleShow}>
+                    {selectedItemId === item.id ? <IconEyeClosed stroke={2} /> : <IconEye stroke={2} />}
                 </button>
                 <button
-                    onClick={handleShowEdit}
-                >
+                    className="item-button"
+                    onClick={handleShowEdit}>
                     <IconPencil stroke={2} />
                 </button>
-                <button onClick={() => handleDelete(item.id)}>
+                <button
+                    className="item-button"
+                    onClick={() => handleDelete(item.id)}>
                     <IconTrash stroke={2} />
                 </button>
             </article>

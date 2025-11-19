@@ -1,5 +1,5 @@
  :root {
-   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+   font-family: system-ui;
    line-height: 1.5;
    font-weight: 400;
 
@@ -44,6 +44,13 @@
    line-height: 1.1;
  }
 
+ article {
+   background-color: grey;
+   padding: 10;
+   border-radius: 12px;
+   margin-bottom: 10px;
+ }
+
  button {
    margin: 5px;
    border-radius: 8px;
@@ -69,6 +76,12 @@
  .filter-button,
  .add-button {
    background-color: #3b92cc;
+ }
+
+ .item-button {
+   background-color: grey;
+   margin: 0px;
+   place-self: right;
  }
 
  .reset-button {
