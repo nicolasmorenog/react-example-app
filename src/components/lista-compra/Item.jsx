@@ -31,11 +31,20 @@ function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, se
         if (event.key === 'Enter') {
             handleEdit(item.id, editText)
             setShowEditItem(false)
+            toast.success(`Item "${item.name}" guardado correctamente!`)
+
         }
     }
 
     const onChange = (event) => {
         setEditText(event.target.value)
+    }
+
+    const onClick = () => {
+        handleEdit(item.id, editText)
+        setShowEditItem(false)
+        toast.success(`Item "${item.name}" guardado correctamente!`)
+
     }
 
     return (
@@ -62,6 +71,12 @@ function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, se
                             value={editText}
                             onKeyDown={handleEditKeyDown}
                         />
+                        <button
+                            className="add-button"
+                            onClick={onClick}
+                        >
+                            Save
+                        </button>
                     </div>
                 )}
                 {!showEditItem && item && <label> {item.name}</label>}

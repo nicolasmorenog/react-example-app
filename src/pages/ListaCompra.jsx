@@ -86,7 +86,9 @@ function ListaCompra() {
         const anteriorLista = [...lista]
         setLista(nuevaLista)
 
-        toast.success('Item has been deleted', {
+        const itemToDelete = lista.find((item) => item.id === id)
+
+        toast.success(`Item "${itemToDelete.name}" has been deleted`, {
             action: {
                 label: 'Undo',
                 onClick: () => setLista(anteriorLista)
