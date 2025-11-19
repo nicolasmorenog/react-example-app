@@ -45,10 +45,11 @@ function ListaCompra() {
 
         const nuevaLista = lista.map(item => {
             if (item.id === id) {
-                if (item.completedAt === null) {
-                    return { ...item, updatedAt: now, completedAt: now }
+                return {
+                    ...item,
+                    updatedAt: now,
+                    completedAt: item.completedAt === null ? now : null
                 }
-                else { return { ...item, updatedAt: now, completedAt: null } }
             }
             else { return item }
         })
@@ -110,9 +111,9 @@ function ListaCompra() {
 
     return (
         <div>
-            <Toaster 
-            position="bottom-right" 
-            richColors
+            <Toaster
+                position="bottom-right"
+                richColors
             />
             <h2>Shopping List</h2>
             <div>
