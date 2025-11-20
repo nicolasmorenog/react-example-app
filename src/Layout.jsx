@@ -8,7 +8,7 @@ const Layout = () => {
     };
 
     return (
-        <div>
+        <div className="wrapper">
             <h1>React Example App</h1>
             <nav>
                 <Link style={padding} to="/">Home</Link>

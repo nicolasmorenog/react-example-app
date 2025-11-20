@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 //import { useParams } from 'react-router-dom'
 import { Toaster, toast } from "sonner"
+import { IconReload } from "@tabler/icons-react"
 
 import InputItem from "../components/lista-compra/InputItem"
 import ItemList from "../components/lista-compra/ItemList"
@@ -116,34 +117,41 @@ function ListaCompra() {
                 richColors
             />
             <h2>Shopping List</h2>
-            <div>
-                <InputItem
-                    setLista={setLista}
-                />
+            <div className="item">
+                <div className="input-container-flex">
+                    <InputItem
+                        setLista={setLista}
+                    />
+                </div>
             </div>
-            <div>
-                <button
-                    className={`filter-button${filtro === "all" ? "" : "active-button"}`}
-                    onClick={() => setFiltro("all")}>
-                    All
-                </button>
-                <button
-                    className={`filter-button${filtro === "pending" ? "" : "active-button"}`}
-                    onClick={() => setFiltro("pending")}>
-                    Pending
-                </button>
-                <button
-                    className={`filter-button${filtro === "completed" ? "" : "active-button"}`}
-                    onClick={() => setFiltro("completed")}>
-                    Completed
-                </button>
+            <div
+                className="filter-container"
+            >
+                <div className="filter-group">
+                    <button
+                        className={`filter-button${filtro === "all" ? "" : "active-button"}`}
+                        onClick={() => setFiltro("all")}>
+                        All
+                    </button>
+                    <button
+                        className={`filter-button${filtro === "pending" ? "" : "active-button"}`}
+                        onClick={() => setFiltro("pending")}>
+                        Pending
+                    </button>
+                    <button
+                        className={`filter-button${filtro === "completed" ? "" : "active-button"}`}
+                        onClick={() => setFiltro("completed")}>
+                        Completed
+                    </button>
+                </div>
                 <button
                     className="reset-button"
                     onClick={handleReset}>
+                    <IconReload stroke={2} />
                     Reset
                 </button>
             </div>
-            <div>
+            <div className="item-list">
                 <ItemList
                     lista={filteredList}
                     handleToggle={handleToggle}

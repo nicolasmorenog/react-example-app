@@ -35,7 +35,7 @@ function InputItem({ setLista }) {
 
 
     return (
-        <>
+        <div className="input-content">
             <input
                 type='text'
                 placeholder='Add a new item'
@@ -50,7 +50,7 @@ function InputItem({ setLista }) {
 
 
 
-        </>
+        </div>
     )
 }
 

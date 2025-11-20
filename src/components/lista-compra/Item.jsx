@@ -49,7 +49,7 @@ function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, se
     }
 
     return (
-        <div>
+        <div className='item'>
             <article>
                 <input
                     type='checkbox'
@@ -73,22 +73,24 @@ function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, se
                         </button>
                     </div>
                 )}
-                {!showEditItem && item && <label> {item.name}</label>}
-                <button
-                    className="item-button"
-                    onClick={handleShow}>
-                    {selectedItemId === item.id ? <IconEyeClosed stroke={2} /> : <IconEye stroke={2} />}
-                </button>
-                <button
-                    className="item-button"
-                    onClick={handleShowEdit}>
-                    <IconPencil stroke={2} />
-                </button>
-                <button
-                    className="item-button"
-                    onClick={() => handleDelete(item.id)}>
-                    <IconTrash stroke={2} />
-                </button>
+                <div className='item-buttons-group'>
+                    {!showEditItem && item && <label> {item.name}</label>}
+                    <button
+                        className="item-button"
+                        onClick={handleShow}>
+                        {selectedItemId === item.id ? <IconEyeClosed stroke={2} /> : <IconEye stroke={2} />}
+                    </button>
+                    <button
+                        className="item-button"
+                        onClick={handleShowEdit}>
+                        <IconPencil stroke={2} />
+                    </button>
+                    <button
+                        className="item-button"
+                        onClick={() => handleDelete(item.id)}>
+                        <IconTrash color='#cc3b3b' stroke={2} />
+                    </button>
+                </div>
             </article>
             {selectedItemId === item.id && (
                 <div>
