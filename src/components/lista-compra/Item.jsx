@@ -1,15 +1,21 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import { IconTrash, IconPencil, IconEye, IconEyeClosed } from '@tabler/icons-react'
 
 function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, setSelectedItemId }) {
-    //const { id: itemId } = useParams();
+    const { id: itemIdFromURL } = useParams();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (itemIdFromURL === item.id) {
+            setSelectedItemId(item.id);
+        }
+    }, [itemIdFromURL]);
+
     const [showEditItem, setShowEditItem] = useState(false)
 
     const [editText, setEditText] = useState(item.name ?? '')
-
-    const navigate = useNavigate();
 
 
     const handleShow = () => {
