@@ -29,7 +29,8 @@ function App() {
             <Route path="/anecdotes" element={<Anecdotes />} />
             <Route path="/left-right" element={<LeftRight />} />
             <Route path="/lista-compra" element={<ListaCompra />} />
-            <Route path={"/lista-compra/:id"} element={<ListaCompra />} />
+            <Route path="/lista-compra/:id" element={<ListaCompra />} />
+            <Route path="/lista-compra/:id/edit" element={<ListaCompra />} />
             <Route path="/part1" element={<Part1 />} />
             <Route path="/counter" element={<Counter />} />
             <Route path="/unicafe" element={<Unicafe />} />

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useMatch } from 'react-router-dom'
 import { toast } from 'sonner'
 import { IconTrash, IconPencil, IconEye, IconEyeClosed } from '@tabler/icons-react'
 
@@ -7,13 +7,14 @@ function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, se
     const { id: itemIdFromURL } = useParams();
     const navigate = useNavigate();
 
+    const isBeingEdited = useMatch('/lista-compra/:id/edit');
+
+
     useEffect(() => {
-        if (itemIdFromURL === item.id) {
+        if (itemIdFromURL === item.id && !isBeingEdited) {
             setSelectedItemId(item.id);
         }
-    }, [itemIdFromURL]);
-
-    const [showEditItem, setShowEditItem] = useState(false)
+    }, [itemIdFromURL, isBeingEdited]);
 
     const [editText, setEditText] = useState(item.name ?? '')
 
@@ -31,14 +32,18 @@ function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, se
     }
 
     const handleShowEdit = () => {
-        setShowEditItem(!showEditItem)
+        if (isBeingEdited && isBeingEdited.params.id === item.id) {
+            navigate(`/lista-compra/`);
+        } else {
+            navigate(`/lista-compra/${item.id}/edit`);
+        }
     }
 
     const handleEditKeyDown = (event) => {
         if (event.key === 'Enter') {
             handleEdit(item.id, editText)
-            setShowEditItem(false)
             toast.success(`Item "${editText}" was saved!`)
+            navigate(`/lista-compra/${item.id}`)
         }
     }
 
@@ -48,8 +53,8 @@ function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, se
 
     const onClick = () => {
         handleEdit(item.id, editText)
-        setShowEditItem(false)
         toast.success(`Item "${editText}" was saved!`)
+        navigate(`/lista-compra/${item.id}`)
 
     }
 
@@ -62,7 +67,7 @@ function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, se
                     checked={item.completedAt !== null}
                 ></input>
                 <div className='item-content'>
-                    {showEditItem && item ? (
+                    {isBeingEdited && isBeingEdited.params.id === item.id ? (
                         <div className='item-input-container'>
                             <input
                                 type='text'
