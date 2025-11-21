@@ -56,8 +56,9 @@ function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, se
                     onChange={handleToggle}
                     checked={item.completedAt !== null}
                 ></input>
-                {showEditItem && item && (
-                    <div>
+                <div className='item-content'>
+                    {showEditItem && item ? (
+                        <div className='item-input-container'>
                         <input
                             type='text'
                             placeholder={item.name}
@@ -72,7 +73,10 @@ function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, se
                             Save
                         </button>
                     </div>
+                    ) : (
+                        item && <label> {item.name}</label>
                 )}
+                </div>
                 <div className='item-buttons-group'>
                     {!showEditItem && item && <label> {item.name}</label>}
                     <button
