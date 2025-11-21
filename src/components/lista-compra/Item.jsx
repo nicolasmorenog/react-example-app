@@ -74,7 +74,7 @@ function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, se
                             </button>
                         </div>
                     ) : (
-                        item && <label> {item.name}</label>
+                        item && <label className='item-label'> {item.name}</label>
                     )}
                 </div>
                 <div className='item-buttons-group'>
