@@ -11,7 +11,7 @@ const Layout = () => {
     return (
         <div className="wrapper">
             <Toaster
-                position="bottom-right"
+                position="bottom-center"
                 richColors
             />
             <h1>React Example App</h1>
