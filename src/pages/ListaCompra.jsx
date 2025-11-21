@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 //import { useParams } from 'react-router-dom'
-import { Toaster, toast } from "sonner"
+import { toast } from "sonner"
 import { IconReload } from "@tabler/icons-react"
 
 import InputItem from "../components/lista-compra/InputItem"
@@ -14,13 +14,14 @@ function ListaCompra() {
 
     //Leer localStorage
     const [lista, setLista] = useState(() => {
-        const savedValue = localStorage.getItem(LOCAL_STORAGE_KEY)
+        
+
+        try {
+            const savedValue = localStorage.getItem(LOCAL_STORAGE_KEY)
 
         if (savedValue === null) {
             return []
         }
-
-        try {
             return JSON.parse(savedValue)
         }
         catch (error) {
@@ -111,14 +112,10 @@ function ListaCompra() {
     }
 
     return (
-        <div>
-            <Toaster
-                position="bottom-right"
-                richColors
-            />
+        <div className="main-container">
             <h2>Shopping List</h2>
             <div className="item">
-                <div className="input-container-flex">
+                <div>
                     <InputItem
                         setLista={setLista}
                     />

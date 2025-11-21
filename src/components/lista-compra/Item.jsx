@@ -59,26 +59,25 @@ function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, se
                 <div className='item-content'>
                     {showEditItem && item ? (
                         <div className='item-input-container'>
-                        <input
-                            type='text'
-                            placeholder={item.name}
-                            onChange={onChange}
-                            value={editText}
-                            onKeyDown={handleEditKeyDown}
-                        />
-                        <button
-                            className="add-button"
-                            onClick={onClick}
-                        >
-                            Save
-                        </button>
-                    </div>
+                            <input
+                                type='text'
+                                placeholder={item.name}
+                                onChange={onChange}
+                                value={editText}
+                                onKeyDown={handleEditKeyDown}
+                            />
+                            <button
+                                className="add-button"
+                                onClick={onClick}
+                            >
+                                Save
+                            </button>
+                        </div>
                     ) : (
                         item && <label> {item.name}</label>
-                )}
+                    )}
                 </div>
                 <div className='item-buttons-group'>
-                    {!showEditItem && item && <label> {item.name}</label>}
                     <button
                         className="item-button"
                         onClick={handleShow}>
@@ -97,7 +96,8 @@ function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, se
                 </div>
             </article>
             {selectedItemId === item.id && (
-                <div>
+                <div className="item-details">
+                    <hr />
                     {item.createdAt && <p>Created: {new Date(item.createdAt).toLocaleString()}</p>}
                     {item.updatedAt && <p>Updated: {new Date(item.updatedAt).toLocaleString()}</p>}
                     <p>Status: {item.completedAt === null ? 'Pending' : 'Completed'}</p>

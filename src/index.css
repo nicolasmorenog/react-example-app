@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 :root {
   font-family: system-ui;
   line-height: 1.5;
@@ -15,18 +21,24 @@
 
 body {
   margin: 0;
-  /* Ancho mínimo al que se detendrá la ventana */
-  min-width: 800px;
   min-height: 100vh;
-  /* Evita la barra de desplazamiento, forzando al navegador a detener el encogimiento */
-  overflow-x: hidden;
 }
 
 .wrapper {
-  max-width: 1000px;
   width: 100%;
-  margin: 0 auto;
+  max-width: 800px;
+  margin: auto;
   padding: 20px;
+}
+
+.wrapper div {
+  text-align: center;
+}
+
+.nav-hr {
+  width: 515px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 a {
@@ -42,6 +54,14 @@ a:hover {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  text-align: center;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
 }
 
 p {
@@ -77,17 +97,6 @@ button {
   }
 }
 
-.input-container-flex {
-  display: flex;
-  flex-grow: 1;
-}
-
-.input-container {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
-}
-
 .input-content {
   display: flex;
   flex-grow: 1;
@@ -113,7 +122,6 @@ button {
   background-color: #284158;
   border-radius: 8px;
   margin-top: 15px;
-  width: 100%;
   gap: 10px;
 }
 
@@ -153,7 +161,6 @@ button {
   padding: 10px;
   border-radius: 12px;
   margin-bottom: 10px;
-  width: 100%;
 }
 
 .item article {
@@ -184,16 +191,6 @@ button {
   align-items: center;
 }
 
-.item article div input[type="text"]{
-  flex-grow: 1;
-}
-
-.item article div button {
-  flex-shrink: 0;
-  flex-grow: 0;
-  width: auto;
-}
-
 .item-buttons-group {
   display: flex;
   flex-shrink: 0;
@@ -210,6 +207,39 @@ button {
   flex-shrink: 0;
   flex-grow: 0;
   width: auto;
+}
+
+.item-input-container {
+  display: flex;
+  flex-grow: 1;
+  gap: 10px;
+}
+
+.item-input-container input[type="text"] {
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 100px;
+  padding: 0.6em 1.2em;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background-color: #152341;
+  color: white;
+}
+
+.item-details {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.item-details hr {
+  width: 100%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.5);
+  height: 1px;
+  margin-bottom: 10px;
+}
+
+.item-details p {
+  text-align: left;
 }
 
 .filter-button,
