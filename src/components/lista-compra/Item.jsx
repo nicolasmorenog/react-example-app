@@ -35,6 +35,7 @@ function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, se
         if (isBeingEdited && isBeingEdited.params.id === item.id) {
             navigate(`/lista-compra/`);
         } else {
+            setSelectedItemId(null);
             navigate(`/lista-compra/${item.id}/edit`);
         }
     }
@@ -43,7 +44,7 @@ function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, se
         if (event.key === 'Enter') {
             handleEdit(item.id, editText)
             toast.success(`Item "${editText}" was saved!`)
-            navigate(`/lista-compra/${item.id}`)
+            navigate('/lista-compra/')
         }
     }
 
@@ -54,7 +55,7 @@ function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, se
     const onClick = () => {
         handleEdit(item.id, editText)
         toast.success(`Item "${editText}" was saved!`)
-        navigate(`/lista-compra/${item.id}`)
+        navigate('/lista-compra/')
 
     }
 
