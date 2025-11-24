@@ -76,7 +76,7 @@ function ListaCompra() {
         const nuevaLista = lista.map(item => {
             if (item.id === id) {
                 console.log('Item:', item.name, '-->', newName)
-                return { ...item, name: newName, updateAt: now }
+                return { ...item, name: newName, updatedAt: now }
             } else { return item }
         })
 
