@@ -1,25 +1,77 @@
 import { useState, useEffect } from 'react'
-import { useParams, useNavigate, useMatch } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import { IconTrash, IconPencil, IconEye, IconEyeClosed } from '@tabler/icons-react'
 
-function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, setSelectedItemId }) {
-    const { id: itemIdFromURL } = useParams();
-    const navigate = useNavigate();
+function Item({
+    setLista,
+    item, //Undefined --> MODO CREAR | Objeto --> MODO LISTA
+    handleToggle,
+    handleDelete,
+    handleEdit,
+    selectedItemId,
+    setSelectedItemId,
+    isEditing 
+}) {
 
-    const isBeingEdited = useMatch('/lista-compra/:id/edit');
+    //Hooks
+    const navigate = useNavigate()
+    const { id: itemIdFromURL } = useParams()
 
+    //Estado del input
+    const [newItem, setNewItem] = useState(item ? item.name : '')
+
+    //Comprobar si el item está en modo edición
+    const isEditingThisItem = isEditing && item && item.id === itemIdFromURL;
 
     useEffect(() => {
-        if (itemIdFromURL === item.id && !isBeingEdited) {
-            setSelectedItemId(item.id);
+        if (isEditingThisItem) {
+            if (setSelectedItemId) {
+                setSelectedItemId(item.id)
+            }
         }
-    }, [itemIdFromURL, isBeingEdited]);
-
-    const [editText, setEditText] = useState(item.name ?? '')
+    }, [itemIdFromURL, isEditingThisItem, item, setSelectedItemId])
 
 
-    const handleShow = () => {
+    //Handlers
+    const onChange = (e) => {
+        setNewItem(e.target.value)
+    }
+
+    const onClick = () => {
+        if (!item) { 
+            //LÓGICA DEL ANTIGUO INPUTITEM.JSX
+            if (!newItem.trim()) return 
+
+            const now = new Date().toISOString()
+            const newItemObject = {
+                name: newItem,
+                createdAt: now,
+                updatedAt: now,
+                completedAt: null,
+                id: crypto.randomUUID()
+            }
+
+            console.log("New added item: ", newItemObject)
+
+            setLista(prev => [...prev, newItemObject])
+            setNewItem('')
+        } else { 
+            //LÓGICA DEL ANTIGUO ITEM.JSX
+            handleEdit(item.id, newItem)
+            toast.success(`Item "${newItem}" was saved!`)
+            navigate('/lista-compra/')
+        }
+    }
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            onClick()
+        }
+    }
+
+    //Visualización
+    const handleShowDetails = () => {
         if (selectedItemId === item.id) {
             //Si está abierto se cierra
             setSelectedItemId(null)
@@ -31,8 +83,9 @@ function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, se
         }
     }
 
+    //Edición
     const handleShowEdit = () => {
-        if (isBeingEdited && isBeingEdited.params.id === item.id) {
+        if (isEditingThisItem) {
             navigate(`/lista-compra/`);
         } else {
             setSelectedItemId(null);
@@ -40,59 +93,79 @@ function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, se
         }
     }
 
-    const handleEditKeyDown = (event) => {
+      const handleEditKeyDown = (event) => {
         if (event.key === 'Enter') {
-            handleEdit(item.id, editText)
-            toast.success(`Item "${editText}" was saved!`)
+            handleEdit(item.id, newItem)
+            toast.success(`Item "${newItem}" was saved!`)
             navigate('/lista-compra/')
         }
     }
 
-    const onChange = (event) => {
-        setEditText(event.target.value)
+    const onClickSave = () => {
+        handleEdit(item.id, newItem)
+        toast.success(`Item "${newItem}" was saved!`)
+        navigate('/lista-compra')
     }
 
-    const onClick = () => {
-        handleEdit(item.id, editText)
-        toast.success(`Item "${editText}" was saved!`)
-        navigate('/lista-compra/')
-
+    //UI - Modo Creación
+    if (!item) {
+        return (
+            <div className="input-content">
+                <input
+                    type='text'
+                    placeholder='Add a new item'
+                    onChange={onChange}
+                    value={newItem}
+                    onKeyDown={handleKeyDown}
+                />
+                <button
+                    className="add-button"
+                    onClick={onClick}
+                >+ Add</button>
+            </div>
+        )
     }
 
+    //UI - Modo Lista
     return (
         <div className='item'>
             <article>
                 <input
                     type='checkbox'
-                    onChange={handleToggle}
+                    onChange={() => handleToggle(item.id)}
                     checked={item.completedAt !== null}
-                ></input>
+                />
+                
                 <div className='item-content'>
-                    {isBeingEdited && isBeingEdited.params.id === item.id ? (
+                    {isEditingThisItem ? (
                         <div className='item-input-container'>
                             <input
                                 type='text'
                                 placeholder={item.name}
                                 onChange={onChange}
-                                value={editText}
+                                value={newItem}
                                 onKeyDown={handleEditKeyDown}
+                                autoFocus // Un detalle UX extra: enfocar al editar
                             />
                             <button
                                 className="add-button"
-                                onClick={onClick}
+                                onClick={onClickSave}
                             >
                                 Save
                             </button>
                         </div>
                     ) : (
-                        item && <label className='item-label'> {item.name}</label>
+                        <label className='item-label'> {item.name}</label>
                     )}
                 </div>
+
                 <div className='item-buttons-group'>
                     <button
                         className="item-button"
-                        onClick={handleShow}>
-                        {selectedItemId === item.id ? <IconEyeClosed stroke={2} /> : <IconEye stroke={2} />}
+                        onClick={handleShowDetails}>
+                        {selectedItemId === item.id 
+                        ? <IconEyeClosed stroke={2} /> 
+                        : <IconEye stroke={2} />}
                     </button>
                     <button
                         className="item-button"
@@ -106,6 +179,8 @@ function Item({ item, handleToggle, handleDelete, handleEdit, selectedItemId, se
                     </button>
                 </div>
             </article>
+            
+            {/* Detalles del item */}
             {selectedItemId === item.id && (
                 <div className="item-details">
                     <hr />

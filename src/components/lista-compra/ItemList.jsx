@@ -1,6 +1,6 @@
 import Item from "./Item"
 
-function ItemList({ lista, handleToggle, handleEdit, handleDelete, selectedItemId, setSelectedItemId }) {
+function ItemList({ lista, handleToggle, handleEdit, handleDelete, selectedItemId, setSelectedItemId, isEditing }) {
     return (
         <>
             <ul>
@@ -8,11 +8,12 @@ function ItemList({ lista, handleToggle, handleEdit, handleDelete, selectedItemI
                     <Item
                         key={item.id}
                         item={item}
-                        handleToggle={() => handleToggle(item.id)}
+                        handleToggle={handleToggle}
                         handleEdit={handleEdit}
                         handleDelete={handleDelete}
                         selectedItemId={selectedItemId}
                         setSelectedItemId={setSelectedItemId}
+                        isEditing={isEditing}
                     />
                 )
                 )}
