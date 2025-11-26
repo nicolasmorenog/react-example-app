@@ -24,6 +24,33 @@ function ListaCompra({ isEditing = false }) {
     }
   });
 
+  // Array de datos que obtendremos de la API
+  const [data, setData] = useState(null);
+
+  // Obtener datos
+  useEffect(() => {
+    if (lista.length === 0) {
+      fetch('https://jsonplaceholder.typicode.com/todos')
+        .then((response) => response.json())
+        .then((apiData) => setData(apiData));
+    }
+  }, []);
+
+  // Sincronizar datos
+  useEffect(() => {
+    if (data && lista.length === 0) {
+      const now = new Date().toISOString();
+      const listaAPIData = data.map((todo) => ({
+        id: todo.id,
+        name: todo.title,
+        completedAt: todo.completed ? now : null,
+        createdAt: now,
+        updatedAt: now,
+      }));
+      setLista(listaAPIData);
+    }
+  }, [data]);
+
   //Guardar localStorage
   useEffect(() => {
     const valueToSave = JSON.stringify(lista);
