@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 //import { useParams } from 'react-router-dom'
 import { toast } from 'sonner';
-import { useLocation } from 'react-router-dom';
 import { IconReload } from '@tabler/icons-react';
 
 import Item from '../components/lista-compra/Item';
@@ -9,10 +8,7 @@ import ItemList from '../components/lista-compra/ItemList';
 
 const LOCAL_STORAGE_KEY = 'miApp.listaCompra';
 
-function ListaCompra() {
-  // Hook para saber la ruta actual
-  const location = useLocation();
-
+function ListaCompra({ isEditing = false }) {
   //Leer localStorage
   const [lista, setLista] = useState(() => {
     try {
@@ -152,7 +148,7 @@ function ListaCompra() {
           handleDelete={handleDelete}
           selectedItemId={selectedItemId}
           setSelectedItemId={setSelectedItemId}
-          isEditing={location.pathname.endsWith('/edit')}
+          isEditing={isEditing}
         />
       </div>
     </div>
