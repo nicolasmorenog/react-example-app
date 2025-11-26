@@ -29,7 +29,7 @@ function ListaCompra({ isEditing = false }) {
   // Obtener datos
   useEffect(() => {
     if (lista.length === 0) {
-      fetch('https://jsonplaceholder.typicode.com/todos?_limit=5')
+      fetch('https://jsonplaceholder.typicode.com/todos?_limit=20')
         .then((response) => response.json())
         .then((apiData) => setData(apiData));
     }
