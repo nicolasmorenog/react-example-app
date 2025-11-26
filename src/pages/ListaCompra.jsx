@@ -132,6 +132,10 @@ function ListaCompra({ isEditing = false }) {
     });
   };
 
+  const allItemsCount = lista.length;
+  const pendingItemsCount = lista.filter((item) => item.completedAt === null).length;
+  const completedItemsCount = allItemsCount - pendingItemsCount;
+
   return (
     <div className="main-container">
       <h2>Shopping List</h2>
@@ -146,19 +150,19 @@ function ListaCompra({ isEditing = false }) {
             className={`filter-button${filtro === 'all' ? '' : 'active-button'}`}
             onClick={() => setFiltro('all')}
           >
-            All
+            All ({allItemsCount})
           </button>
           <button
             className={`filter-button${filtro === 'pending' ? '' : 'active-button'}`}
             onClick={() => setFiltro('pending')}
           >
-            Pending
+            Pending ({pendingItemsCount})
           </button>
           <button
             className={`filter-button${filtro === 'completed' ? '' : 'active-button'}`}
             onClick={() => setFiltro('completed')}
           >
-            Completed
+            Completed ({completedItemsCount})
           </button>
         </div>
         <button className="reset-button" onClick={handleReset}>
