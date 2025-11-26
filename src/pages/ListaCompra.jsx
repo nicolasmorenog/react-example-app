@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-//import { useParams } from 'react-router-dom'
 import { toast } from 'sonner';
 import { IconReload } from '@tabler/icons-react';
 
