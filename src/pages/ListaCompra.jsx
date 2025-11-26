@@ -91,7 +91,7 @@ function ListaCompra({ isEditing = false }) {
   }
 
   const handleEdit = (id, newName) => {
-    const now = new Date();
+    const now = new Date().toISOString();
 
     const nuevaLista = lista.map((item) => {
       if (item.id === id) {
