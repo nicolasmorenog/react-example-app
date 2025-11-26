@@ -1,171 +1,162 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from 'react';
 //import { useParams } from 'react-router-dom'
-import { toast } from "sonner"
-import { useLocation } from "react-router-dom"
-import { IconReload } from "@tabler/icons-react"
+import { toast } from 'sonner';
+import { useLocation } from 'react-router-dom';
+import { IconReload } from '@tabler/icons-react';
 
-import Item from "../components/lista-compra/Item"
-import ItemList from "../components/lista-compra/ItemList"
+import Item from '../components/lista-compra/Item';
+import ItemList from '../components/lista-compra/ItemList';
 
-
-const LOCAL_STORAGE_KEY = 'miApp.listaCompra'
+const LOCAL_STORAGE_KEY = 'miApp.listaCompra';
 
 function ListaCompra() {
+  // Hook para saber la ruta actual
+  const location = useLocation();
 
-    // Hook para saber la ruta actual
-    const location = useLocation();
+  //Leer localStorage
+  const [lista, setLista] = useState(() => {
+    try {
+      const savedValue = localStorage.getItem(LOCAL_STORAGE_KEY);
 
-
-    //Leer localStorage
-    const [lista, setLista] = useState(() => {
-        
-
-        try {
-            const savedValue = localStorage.getItem(LOCAL_STORAGE_KEY)
-
-        if (savedValue === null) {
-            return []
-        }
-            return JSON.parse(savedValue)
-        }
-        catch (error) {
-            console.error("Error: ", error)
-            return []
-        }
-    })
-
-    //Guardar localStorage
-    useEffect(() => {
-        const valueToSave = JSON.stringify(lista)
-        localStorage.setItem(LOCAL_STORAGE_KEY, valueToSave)
-        console.log("LISTA GUARDADA: ")
-        console.table(lista)
-
-    }, [lista])
-
-    const [filtro, setFiltro] = useState("all")
-    const [selectedItemId, setSelectedItemId] = useState(null)
-
-    const handleToggle = (id) => {
-        const now = new Date().toISOString()
-
-        const nuevaLista = lista.map(item => {
-            if (item.id === id) {
-                return {
-                    ...item,
-                    updatedAt: now,
-                    completedAt: item.completedAt === null ? now : null
-                }
-            }
-            else { return item }
-        })
-
-        setLista(nuevaLista)
-        console.table(nuevaLista)
+      if (savedValue === null) {
+        return [];
+      }
+      return JSON.parse(savedValue);
+    } catch (error) {
+      console.error('Error: ', error);
+      return [];
     }
+  });
 
-    let filteredList
+  //Guardar localStorage
+  useEffect(() => {
+    const valueToSave = JSON.stringify(lista);
+    localStorage.setItem(LOCAL_STORAGE_KEY, valueToSave);
+    console.log('LISTA GUARDADA: ');
+    console.table(lista);
+  }, [lista]);
 
-    if (filtro === "pending") {
-        filteredList = lista.filter(item => item.completedAt === null)
-    } else if (filtro === "completed") {
-        filteredList = lista.filter(item => item.completedAt !== null)
-    } else {
-        filteredList = lista
-    }
+  const [filtro, setFiltro] = useState('all');
+  const [selectedItemId, setSelectedItemId] = useState(null);
 
-    const handleEdit = (id, newName) => {
-        const now = new Date()
+  const handleToggle = (id) => {
+    const now = new Date().toISOString();
 
-        const nuevaLista = lista.map(item => {
-            if (item.id === id) {
-                console.log('Item:', item.name, '-->', newName)
-                return { ...item, name: newName, updatedAt: now }
-            } else { return item }
-        })
+    const nuevaLista = lista.map((item) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          updatedAt: now,
+          completedAt: item.completedAt === null ? now : null,
+        };
+      } else {
+        return item;
+      }
+    });
 
-        setLista(nuevaLista)
+    setLista(nuevaLista);
+    console.table(nuevaLista);
+  };
 
-    }
+  let filteredList;
 
-    const handleDelete = (id) => {
-        const nuevaLista = lista.filter((item) => item.id !== id)
-        const anteriorLista = [...lista]
-        setLista(nuevaLista)
+  if (filtro === 'pending') {
+    filteredList = lista.filter((item) => item.completedAt === null);
+  } else if (filtro === 'completed') {
+    filteredList = lista.filter((item) => item.completedAt !== null);
+  } else {
+    filteredList = lista;
+  }
 
-        const itemToDelete = lista.find((item) => item.id === id)
+  const handleEdit = (id, newName) => {
+    const now = new Date();
 
-        toast.success(`Item "${itemToDelete.name}" has been deleted`, {
-            action: {
-                label: 'Undo',
-                onClick: () => setLista(anteriorLista)
-            }
-        })
-    }
+    const nuevaLista = lista.map((item) => {
+      if (item.id === id) {
+        console.log('Item:', item.name, '-->', newName);
+        return { ...item, name: newName, updatedAt: now };
+      } else {
+        return item;
+      }
+    });
 
-    const handleReset = () => {
-        const anteriorLista = [...lista]
-        setLista([])
+    setLista(nuevaLista);
+  };
 
-        toast.success('All your items were cleared', {
-            action: {
-                label: 'Undo',
-                onClick: () => setLista(anteriorLista)
-            }
-        })
-    }
+  const handleDelete = (id) => {
+    const nuevaLista = lista.filter((item) => item.id !== id);
+    const anteriorLista = [...lista];
+    setLista(nuevaLista);
 
-    return (
-        <div className="main-container">
-            <h2>Shopping List</h2>
-            <div className="item">
-                <div>
-                    <Item
-                        setLista={setLista}
-                    />
-                </div>
-            </div>
-            <div
-                className="filter-container"
-            >
-                <div className="filter-group">
-                    <button
-                        className={`filter-button${filtro === "all" ? "" : "active-button"}`}
-                        onClick={() => setFiltro("all")}>
-                        All
-                    </button>
-                    <button
-                        className={`filter-button${filtro === "pending" ? "" : "active-button"}`}
-                        onClick={() => setFiltro("pending")}>
-                        Pending
-                    </button>
-                    <button
-                        className={`filter-button${filtro === "completed" ? "" : "active-button"}`}
-                        onClick={() => setFiltro("completed")}>
-                        Completed
-                    </button>
-                </div>
-                <button
-                    className="reset-button"
-                    onClick={handleReset}>
-                    <IconReload stroke={2} />
-                    Reset
-                </button>
-            </div>
-            <div className="item-list">
-                <ItemList
-                    lista={filteredList}
-                    handleToggle={handleToggle}
-                    handleEdit={handleEdit}
-                    handleDelete={handleDelete}
-                    selectedItemId={selectedItemId}
-                    setSelectedItemId={setSelectedItemId}
-                    isEditing={location.pathname.endsWith('/edit')} 
-                />
-            </div>
+    const itemToDelete = lista.find((item) => item.id === id);
 
-        </div >
-    )
+    toast.success(`Item "${itemToDelete.name}" has been deleted`, {
+      action: {
+        label: 'Undo',
+        onClick: () => setLista(anteriorLista),
+      },
+    });
+  };
+
+  const handleReset = () => {
+    const anteriorLista = [...lista];
+    setLista([]);
+
+    toast.success('All your items were cleared', {
+      action: {
+        label: 'Undo',
+        onClick: () => setLista(anteriorLista),
+      },
+    });
+  };
+
+  return (
+    <div className="main-container">
+      <h2>Shopping List</h2>
+      <div className="item">
+        <div>
+          <Item setLista={setLista} />
+        </div>
+      </div>
+      <div className="filter-container">
+        <div className="filter-group">
+          <button
+            className={`filter-button${filtro === 'all' ? '' : 'active-button'}`}
+            onClick={() => setFiltro('all')}
+          >
+            All
+          </button>
+          <button
+            className={`filter-button${filtro === 'pending' ? '' : 'active-button'}`}
+            onClick={() => setFiltro('pending')}
+          >
+            Pending
+          </button>
+          <button
+            className={`filter-button${filtro === 'completed' ? '' : 'active-button'}`}
+            onClick={() => setFiltro('completed')}
+          >
+            Completed
+          </button>
+        </div>
+        <button className="reset-button" onClick={handleReset}>
+          <IconReload stroke={2} />
+          Reset
+        </button>
+      </div>
+      <div className="item-list">
+        <ItemList
+          lista={filteredList}
+          handleToggle={handleToggle}
+          handleEdit={handleEdit}
+          handleDelete={handleDelete}
+          selectedItemId={selectedItemId}
+          setSelectedItemId={setSelectedItemId}
+          isEditing={location.pathname.endsWith('/edit')}
+        />
+      </div>
+    </div>
+  );
 }
 
-export default ListaCompra
+export default ListaCompra;

@@ -14,17 +14,11 @@ const Part1 = lazy(() => import('./pages/Part1'));
 const Unicafe = lazy(() => import('./pages/Unicafe'));
 
 function App() {
-
   return (
     <BrowserRouter>
       <Suspense fallback={<div>Cargando proyecto...</div>}>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Layout />
-            }
-          >
+          <Route path="/" element={<Layout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/anecdotes" element={<Anecdotes />} />
             <Route path="/left-right" element={<LeftRight />} />

@@ -1,16 +1,13 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
 const Header = () => {
-  return (
-    <h1>Give feedback</h1>
-  )
-}
+  return <h1>Give feedback</h1>;
+};
 
 const Stats = (props) => {
-
-  const total = props.good + props.neutral + props.bad
-  const average = (props.good - props.bad) / total
-  const positive = (props.good / total) * 100
+  const total = props.good + props.neutral + props.bad;
+  const average = (props.good - props.bad) / total;
+  const positive = (props.good / total) * 100;
 
   if (total == 0) {
     return (
@@ -18,9 +15,8 @@ const Stats = (props) => {
         <h1>Statistics</h1>
         <p>No feedback given yet</p>
       </>
-    )
-  }
-  else {
+    );
+  } else {
     return (
       <>
         <h1>Statistics</h1>
@@ -48,11 +44,11 @@ const Stats = (props) => {
               <td>{positive}%</td>
             </tr>
           </tbody>
-        </table >
+        </table>
       </>
-    )
+    );
   }
-}
+};
 
 const StatLine = (props) => {
   return (
@@ -60,22 +56,18 @@ const StatLine = (props) => {
       <td>{props.text}</td>
       <td>{props.stat}</td>
     </>
-  )
-}
+  );
+};
 
 const Button = (props) => {
-  return (
-    <button onClick={props.setStat}>
-      {props.text}
-    </button >
-  )
-}
+  return <button onClick={props.setStat}>{props.text}</button>;
+};
 
 const Unicafe = () => {
   // guarda los clics de cada botón en su propio estado
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
 
   return (
     <div>
@@ -85,7 +77,7 @@ const Unicafe = () => {
       <Button setStat={() => setBad(bad + 1)} text="Bad" />
       <Stats good={good} neutral={neutral} bad={bad} />
     </div>
-  )
-}
+  );
+};
 
-export default Unicafe
+export default Unicafe;
