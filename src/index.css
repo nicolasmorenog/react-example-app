@@ -254,7 +254,9 @@ button {
 }
 
 .pagination button{
-  background-color: #152341;
+  background-color: #2f4d935a;
+  margin-left: 3px;
+  margin-right: 3px;
 }
 
 .adjacent-page {
@@ -263,7 +265,8 @@ button {
   }
 }
 
-.inactive-button {
+.pagination .inactive-button {
+  background-color: #152341;
   color: rgba(255, 255, 255, 0.5);
   &:hover {
     border-color: #152341;
