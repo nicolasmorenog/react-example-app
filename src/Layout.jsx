@@ -25,6 +25,9 @@ const Layout = () => {
           <Link style={padding} to="/lista-compra">
             Lista Compra
           </Link>
+          <Link style={padding} to="/to-do-list-API">
+            To Do List
+          </Link>
           <Link style={padding} to="/part1">
             Part 1
           </Link>

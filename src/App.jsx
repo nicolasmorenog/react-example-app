@@ -10,6 +10,7 @@ const Anecdotes = lazy(() => import('./pages/Anecdotes'));
 const Counter = lazy(() => import('./pages/Counter'));
 const LeftRight = lazy(() => import('./pages/LeftRight'));
 const ListaCompra = lazy(() => import('./pages/ListaCompra'));
+const ToDoListAPI = lazy(() => import('./pages/ToDoListAPI'));
 const Part1 = lazy(() => import('./pages/Part1'));
 const Unicafe = lazy(() => import('./pages/Unicafe'));
 
@@ -25,6 +26,9 @@ function App() {
             <Route path="/lista-compra" element={<ListaCompra />} />
             <Route path="/lista-compra/:id" element={<ListaCompra />} />
             <Route path="/lista-compra/:id/edit" element={<ListaCompra isEditing={true} />} />
+            <Route path="/to-do-list-API" element={<ToDoListAPI />} />
+            <Route path="/to-do-list-API/:id" element={<ToDoListAPI />} />
+            <Route path="/to-do-list-API/:id/edit" element={<ToDoListAPI isEditing={true} />} />
             <Route path="/part1" element={<Part1 />} />
             <Route path="/counter" element={<Counter />} />
             <Route path="/unicafe" element={<Unicafe />} />

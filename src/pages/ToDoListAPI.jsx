@@ -5,9 +5,9 @@ import { IconReload } from '@tabler/icons-react';
 import Item from '../components/lista-compra/Item';
 import ItemList from '../components/lista-compra/ItemList';
 
-const LOCAL_STORAGE_KEY = 'miApp.listaCompra';
+const LOCAL_STORAGE_KEY = 'miApp.toDoListAPI';
 
-function ListaCompra({ isEditing = false }) {
+function ToDoListAPI({ isEditing = false }) {
   //Leer localStorage
   const [lista, setLista] = useState(() => {
     try {
@@ -22,6 +22,33 @@ function ListaCompra({ isEditing = false }) {
       return [];
     }
   });
+
+  // Array de datos que obtendremos de la API
+  const [data, setData] = useState(null);
+
+  // Obtener datos
+  useEffect(() => {
+    if (lista.length === 0) {
+      fetch('https://jsonplaceholder.typicode.com/todos?_limit=20')
+        .then((response) => response.json())
+        .then((apiData) => setData(apiData));
+    }
+  }, []);
+
+  // Sincronizar datos
+  useEffect(() => {
+    if (data && lista.length === 0) {
+      const now = new Date().toISOString();
+      const listaAPIData = data.map((todo) => ({
+        id: todo.id,
+        name: todo.title,
+        completedAt: todo.completed ? now : null,
+        createdAt: now,
+        updatedAt: now,
+      }));
+      setLista(listaAPIData);
+    }
+  }, [data]);
 
   //Guardar localStorage
   useEffect(() => {
@@ -158,4 +185,4 @@ function ListaCompra({ isEditing = false }) {
   );
 }
 
-export default ListaCompra;
+export default ToDoListAPI;
