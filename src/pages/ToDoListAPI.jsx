@@ -146,7 +146,7 @@ function ToDoListAPI({ isEditing = false }) {
 
   return (
     <div className="main-container">
-      <h2>To Do List</h2>
+      <h2>Shopping List</h2>
       <div className="item">
         <div>
           <Item setLista={setLista} />
