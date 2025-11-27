@@ -29,7 +29,7 @@ function ToDoListAPI({ isEditing = false }) {
   // Obtener datos
   useEffect(() => {
     if (lista.length === 0) {
-      fetch('https://jsonplaceholder.typicode.com/todos?_limit=20')
+      fetch('https://jsonplaceholder.typicode.com/todos?_limit=100')
         .then((response) => response.json())
         .then((apiData) => setData(apiData));
     }
