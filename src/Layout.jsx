@@ -26,7 +26,7 @@ const Layout = () => {
             Lista Compra
           </Link>
           <Link style={padding} to="/to-do-list-API">
-            To Do List
+            To Do List API
           </Link>
           <Link style={padding} to="/part1">
             Part 1

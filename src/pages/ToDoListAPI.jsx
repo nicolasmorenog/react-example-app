@@ -132,9 +132,17 @@ function ToDoListAPI({ isEditing = false }) {
     });
   };
 
+  // Contadores de items en cada filtro
   const allItemsCount = lista.length;
   const pendingItemsCount = lista.filter((item) => item.completedAt === null).length;
   const completedItemsCount = allItemsCount - pendingItemsCount;
+
+  // Paginación
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  const firstIndex = (currentPage - 1) * itemsPerPage;
+  const lastIndex = firstIndex + itemsPerPage;
+  let paginatedList = filteredList.slice(firstIndex, lastIndex);
 
   return (
     <div className="main-container">
@@ -148,19 +156,28 @@ function ToDoListAPI({ isEditing = false }) {
         <div className="filter-group">
           <button
             className={`filter-button${filtro === 'all' ? '' : 'active-button'}`}
-            onClick={() => setFiltro('all')}
+            onClick={() => {
+              setFiltro('all');
+              setCurrentPage(1);
+            }}
           >
             All ({allItemsCount})
           </button>
           <button
             className={`filter-button${filtro === 'pending' ? '' : 'active-button'}`}
-            onClick={() => setFiltro('pending')}
+            onClick={() => {
+              setFiltro('pending');
+              setCurrentPage(1);
+            }}
           >
             Pending ({pendingItemsCount})
           </button>
           <button
             className={`filter-button${filtro === 'completed' ? '' : 'active-button'}`}
-            onClick={() => setFiltro('completed')}
+            onClick={() => {
+              setFiltro('completed');
+              setCurrentPage(1);
+            }}
           >
             Completed ({completedItemsCount})
           </button>
@@ -172,7 +189,7 @@ function ToDoListAPI({ isEditing = false }) {
       </div>
       <div className="item-list">
         <ItemList
-          lista={filteredList}
+          lista={paginatedList}
           handleToggle={handleToggle}
           handleEdit={handleEdit}
           handleDelete={handleDelete}
@@ -180,6 +197,30 @@ function ToDoListAPI({ isEditing = false }) {
           setSelectedItemId={setSelectedItemId}
           isEditing={isEditing}
         />
+        {filteredList.length > 10 && (
+          <div className="pagination">
+            {filteredList.slice(firstIndex - 10, lastIndex - 10).length > 0 ? (
+              <button onClick={() => setCurrentPage(currentPage - 1)}>&lt; Previous</button>
+            ) : (
+              <button className="inactive-button" disabled>
+                &lt; Previous
+              </button>
+            )}
+            {currentPage > 1 && <button className="adjacent-page">{currentPage - 1}</button>}
+            <button className="pagination-current-page">{currentPage}</button>
+            {filteredList.slice(firstIndex + 10, lastIndex + 10).length > 0 && (
+              <button className="adjacent-page">{currentPage + 1}</button>
+            )}
+            {/* {filteredList.slice(firstIndex + 10, lastIndex + 10).length > 0 && <button>···</button>} */}
+            {filteredList.slice(firstIndex + 10, lastIndex + 10).length > 0 ? (
+              <button onClick={() => setCurrentPage(currentPage + 1)}>Next &gt;</button>
+            ) : (
+              <button className="inactive-button" disabled>
+                Next &gt;
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
