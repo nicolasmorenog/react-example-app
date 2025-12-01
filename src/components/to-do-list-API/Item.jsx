@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { IconTrash, IconPencil, IconEye, IconEyeClosed } from '@tabler/icons-react';
+import { useContext } from 'react';
+import { AppContext } from '@/context/AppContext';
 
 function Item({
   item, //Undefined --> MODO CREAR | Objeto --> MODO LISTA
@@ -13,6 +15,8 @@ function Item({
   setSelectedItemId,
   isEditing,
 }) {
+  const { example } = useContext(AppContext);
+
   // Hooks.
   const navigate = useNavigate();
   const { id: itemIdFromURL } = useParams();
@@ -41,6 +45,7 @@ function Item({
     if (!newItem.trim()) return;
     handleAddItem(newItem);
     setNewItem('');
+    example();
   };
 
   const handleKeyDown = (event) => {

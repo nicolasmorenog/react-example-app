@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import AppProvider from '@/provider/AppProvider';
 
 // Import de Layout y HomePage estático
 import Layout from './Layout';
@@ -19,7 +20,14 @@ function App() {
     <BrowserRouter>
       <Suspense fallback={<div>Cargando proyecto...</div>}>
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route
+            path="/"
+            element={
+              <AppProvider>
+                <Layout />
+              </AppProvider>
+            }
+          >
             <Route path="/" element={<HomePage />} />
             <Route path="/anecdotes" element={<Anecdotes />} />
             <Route path="/left-right" element={<LeftRight />} />
