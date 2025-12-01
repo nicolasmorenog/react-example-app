@@ -13,7 +13,7 @@ function ToDoListAPI({ isEditing = false }) {
   const [filtro, setFiltro] = useState('all');
   const [selectedItemId, setSelectedItemId] = useState(null);
 
-  // Obtenemos las tareas de Supabase
+  // Obtenemos las tareas de Supabase.
   const fetchTasks = async () => {
     const { data: todos, error } = await supabase.from('todos').select('*');
 
@@ -21,7 +21,7 @@ function ToDoListAPI({ isEditing = false }) {
       console.error('Error fetching tasks:', error);
       toast.error('Could not fetch tasks');
     } else {
-      // Mapeamos los datos de Supabase a la estructura de Item
+      // Mapeamos los datos de Supabase a la estructura de Item.
       const listaAPIData = todos.map((todo) => ({
         id: todo.id,
         name: todo.name,
@@ -34,12 +34,12 @@ function ToDoListAPI({ isEditing = false }) {
     }
   };
 
-  // useEffect para cargar las tareas al iniciar el componente
+  // useEffect para cargar las tareas al iniciar el componente.
   useEffect(() => {
     fetchTasks();
   }, []);
 
-  // 4. Función para añadir un nuevo item
+  // Función para añadir un nuevo item.
   const handleAddItem = async (newItemName) => {
     const { data: newItems, error } = await supabase
       .from('todos')
@@ -49,7 +49,7 @@ function ToDoListAPI({ isEditing = false }) {
     if (error) {
       toast.error('Failed to add new item.');
     } else if (newItems && newItems.length > 0) {
-      // Actualizamos el estado local con el nuevo item devuelto por Supabase
+      // Actualizamos el estado local con el nuevo item devuelto por Supabase.
       const newItemObject = {
         id: newItems[0].id,
         name: newItems[0].name,
@@ -80,7 +80,7 @@ function ToDoListAPI({ isEditing = false }) {
     }
   };
 
-  //Edit
+  // Función para editar item.
   const handleEdit = async (id, newName) => {
     const now = new Date().toISOString();
     const { error } = await supabase.from('todos').update({ name: newName, updated_at: now }).eq('id', id);
@@ -93,7 +93,7 @@ function ToDoListAPI({ isEditing = false }) {
     }
   };
 
-  // Delete
+  // Función para borrar item.
   const handleDelete = async (id) => {
     const itemToDelete = lista.find((item) => item.id === id);
     const { error: deleteError } = await supabase.from('todos').delete().eq('id', id);
@@ -107,7 +107,7 @@ function ToDoListAPI({ isEditing = false }) {
         action: {
           label: 'Undo',
 
-          // Restore
+          // Función para recuperar item.
           onClick: async () => {
             const itemToRestore = {
               id: itemToDelete.id,
@@ -130,7 +130,7 @@ function ToDoListAPI({ isEditing = false }) {
     }
   };
 
-  // Reset
+  // Función para reestablecer la lista.
   const handleReset = async () => {
     const anteriorLista = [...lista];
     const { error } = await supabase.from('todos').delete().neq('id', 0); // Borra todos los registros
@@ -148,12 +148,12 @@ function ToDoListAPI({ isEditing = false }) {
     }
   };
 
-  // Contadores de items en cada filtro
+  // Contadores de items en cada filtro.
   const allItemsCount = lista.length;
   const pendingItemsCount = lista.filter((item) => item.completedAt === null).length;
   const completedItemsCount = allItemsCount - pendingItemsCount;
 
-  // Filtrado
+  // Filtrado.
   let filteredList;
   if (filtro === 'pending') {
     filteredList = lista.filter((item) => item.completedAt === null);
@@ -163,7 +163,7 @@ function ToDoListAPI({ isEditing = false }) {
     filteredList = lista;
   }
 
-  // Paginación
+  // Paginación.
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const firstIndex = (currentPage - 1) * itemsPerPage;

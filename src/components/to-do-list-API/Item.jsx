@@ -13,14 +13,14 @@ function Item({
   setSelectedItemId,
   isEditing,
 }) {
-  //Hooks
+  // Hooks.
   const navigate = useNavigate();
   const { id: itemIdFromURL } = useParams();
 
-  //Estado del input
+  // Estado del input.
   const [newItem, setNewItem] = useState(item ? item.name : '');
 
-  //Comprobar si el item está en modo edición
+  // Comprobar si el item está en modo edición.
   const isEditingThisItem = isEditing && item && item.id === itemIdFromURL;
 
   useEffect(() => {
@@ -31,13 +31,13 @@ function Item({
     }
   }, [itemIdFromURL, isEditingThisItem, item, setSelectedItemId]);
 
-  //Handlers
+  // Handlers.
   const onChange = (e) => {
     setNewItem(e.target.value);
   };
 
   const onClick = () => {
-    // Modo creación: llama a handleAddItem y limpia el input
+    // Modo creación: llama a handleAddItem y limpia el input.
     if (!newItem.trim()) return;
     handleAddItem(newItem);
     setNewItem('');
@@ -49,20 +49,20 @@ function Item({
     }
   };
 
-  //Visualización
+  // Visualización.
   const handleShowDetails = () => {
     if (selectedItemId === item.id) {
-      //Si está abierto se cierra
+      // Si está abierto se cierra.
       setSelectedItemId(null);
       navigate('/to-do-list-API');
     } else {
-      //Si está cerrado se abre
+      // Si está cerrado se abre.
       setSelectedItemId(item.id);
       navigate(`/to-do-list-API/${item.id}`);
     }
   };
 
-  //Edición
+  // Edición.
   const handleShowEdit = () => {
     if (isEditingThisItem) {
       navigate(`/to-do-list-API`);
@@ -86,7 +86,7 @@ function Item({
     navigate('/to-do-list-API');
   };
 
-  //UI - Modo Creación
+  // UI - Modo Creación.
   if (!item) {
     return (
       <div className="input-content">
@@ -98,7 +98,7 @@ function Item({
     );
   }
 
-  //UI - Modo Lista
+  // UI - Modo Lista.
   return (
     <div className="item">
       <article>
@@ -113,7 +113,7 @@ function Item({
                 onChange={onChange}
                 value={newItem}
                 onKeyDown={handleEditKeyDown}
-                autoFocus // Un detalle UX extra: enfocar al editar
+                autoFocus
               />
               <button className="add-button" onClick={onClickSave}>
                 Save
