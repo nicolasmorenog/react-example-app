@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import AppProvider from '@/provider/AppProvider';
+import { AppProvider } from '@/provider/AppProvider';
 
 // Import de Layout y HomePage estático
 import Layout from './Layout';
