@@ -146,10 +146,18 @@ function ToDoListAPI({ isEditing = false }) {
 
   // Paginación.
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
-  const firstIndex = (currentPage - 1) * itemsPerPage;
-  const lastIndex = firstIndex + itemsPerPage;
+  const [rowsPerPage, setRowsPerPage] = useState(6);
+  const rowOptions = [6, 10, 20, 50];
+  const firstIndex = (currentPage - 1) * rowsPerPage;
+  const lastIndex = firstIndex + rowsPerPage;
   let paginatedList = filteredList.slice(firstIndex, lastIndex);
+
+  // Función para manejar el cambio de filas por página
+  const handleRowsPerPageChange = (e) => {
+    const newRows = Number(e.target.value);
+    setRowsPerPage(newRows);
+    setCurrentPage(1);
+  };
 
   return (
     <div className="main-container">
@@ -218,7 +226,6 @@ function ToDoListAPI({ isEditing = false }) {
             {filteredList.slice(firstIndex + 10, lastIndex + 10).length > 0 && (
               <button className="adjacent-page">{currentPage + 1}</button>
             )}
-            {/* {filteredList.slice(firstIndex + 10, lastIndex + 10).length > 0 && <button>···</button>} */}
             {filteredList.slice(firstIndex + 10, lastIndex + 10).length > 0 ? (
               <button onClick={() => setCurrentPage(currentPage + 1)}>Next &gt;</button>
             ) : (
@@ -228,6 +235,15 @@ function ToDoListAPI({ isEditing = false }) {
             )}
           </div>
         )}
+        <div>
+          <span>Rows per page: </span>
+          <select value={rowsPerPage} onChange={handleRowsPerPageChange}>
+            <option value={6}>6</option>
+            <option value={10}>10</option>
+            <option value={20}>20</option>
+            <option value={50}>50</option>
+          </select>
+        </div>
       </div>
     </div>
   );
