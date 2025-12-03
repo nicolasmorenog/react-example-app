@@ -70,6 +70,7 @@ function ToDoListAPI({ isEditing = false }) {
     } else {
       const nuevaLista = lista.map((item) => (item.id === id ? { ...item, name: newName, updatedAt: now } : item));
       setLista(nuevaLista);
+      toast.success(`Item "${newName}" was saved!`);
     }
   };
 
@@ -99,10 +100,10 @@ function ToDoListAPI({ isEditing = false }) {
             const { error: restoreError } = await supabase.from('todos').insert(itemToRestore).select();
 
             if (restoreError) {
-              toast.error(`Item couldn't be restored`);
+              toast.error(`Item "${itemToRestore.name}" couldn't be restored`);
             } else {
               setLista((prev) => [...prev, itemToDelete]);
-              toast.success('Item was restored!');
+              toast.success(`Item "${itemToRestore.name}" was restored!`);
             }
           },
         },

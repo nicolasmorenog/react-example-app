@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
 import { IconTrash, IconPencil, IconEye, IconEyeClosed } from '@tabler/icons-react';
 import { useContext } from 'react';
 import { AppContext } from '@/context/AppContext';
@@ -78,14 +77,12 @@ function Item({
   const handleEditKeyDown = (event) => {
     if (event.key === 'Enter') {
       handleEdit(item.id, newItem);
-      toast.success(`Item "${item.name}" was saved!`);
       navigate('/to-do-list-API');
     }
   };
 
   const onClickSave = () => {
     handleEdit(item.id, newItem);
-    toast.success(`Item "${item.name}" was saved!`);
     navigate('/to-do-list-API');
   };
 
