@@ -147,7 +147,6 @@ function ToDoListAPI({ isEditing = false }) {
   // Paginación.
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(6);
-  const rowOptions = [6, 10, 20, 50];
   const firstIndex = (currentPage - 1) * rowsPerPage;
   const lastIndex = firstIndex + rowsPerPage;
   let paginatedList = filteredList.slice(firstIndex, lastIndex);
