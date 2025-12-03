@@ -4,9 +4,6 @@ import { toast } from 'sonner';
 import { supabase } from '../supabaseClient';
 
 export const AppProvider = ({ children }) => {
-  const example = () => {
-    console.log(1);
-  };
 
   // Estado para la lista de tareas. Lo inicializamos como un array vacío.
   const [lista, setLista] = useState([]);
@@ -32,5 +29,5 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  return <AppContext.Provider value={{ example, fetchTasks, lista, setLista }}>{children}</AppContext.Provider>;
+  return <AppContext.Provider value={{ fetchTasks, lista, setLista }}>{children}</AppContext.Provider>;
 };

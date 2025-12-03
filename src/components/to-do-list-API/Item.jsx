@@ -15,7 +15,7 @@ function Item({
   setSelectedItemId,
   isEditing,
 }) {
-  const { example } = useContext(AppContext);
+  const { handleAddItem } = useContext(AppContext);
 
   // Hooks.
   const navigate = useNavigate();
