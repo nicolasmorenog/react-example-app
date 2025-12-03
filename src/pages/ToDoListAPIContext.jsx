@@ -147,8 +147,11 @@ function ToDoListAPI({ isEditing = false }) {
   // Paginación.
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(6);
+  console.log('Filas por página', rowsPerPage);
   const firstIndex = (currentPage - 1) * rowsPerPage;
+  console.log('Primer índice', firstIndex);
   const lastIndex = firstIndex + rowsPerPage;
+  console.log('Último índice', lastIndex);
   let paginatedList = filteredList.slice(firstIndex, lastIndex);
 
   // Función para manejar el cambio de filas por página
@@ -211,9 +214,9 @@ function ToDoListAPI({ isEditing = false }) {
           setSelectedItemId={setSelectedItemId}
           isEditing={isEditing}
         />
-        {filteredList.length > 10 && (
+        {filteredList.length > rowsPerPage && (
           <div className="pagination">
-            {filteredList.slice(firstIndex - 10, lastIndex - 10).length > 0 ? (
+            {filteredList.slice(firstIndex - rowsPerPage, lastIndex - rowsPerPage).length > 0 ? (
               <button onClick={() => setCurrentPage(currentPage - 1)}>&lt; Previous</button>
             ) : (
               <button className="inactive-button" disabled>
