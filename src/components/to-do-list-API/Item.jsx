@@ -7,7 +7,6 @@ import { AppContext } from '@/context/AppContext';
 
 function Item({
   item, //Undefined --> MODO CREAR | Objeto --> MODO LISTA
-  handleAddItem,
   handleToggle,
   handleDelete,
   handleEdit,
@@ -45,7 +44,6 @@ function Item({
     if (!newItem.trim()) return;
     handleAddItem(newItem);
     setNewItem('');
-    example();
   };
 
   const handleKeyDown = (event) => {
