@@ -19,6 +19,7 @@ function ToDoListAPI({ isEditing = false }) {
     fetchTasks();
   }, []);
 
+  // Checkbox de completado.
   const handleToggle = async (id) => {
     const now = new Date().toISOString();
     const itemToToggle = lista.find((item) => item.id === id);

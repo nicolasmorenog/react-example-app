@@ -105,7 +105,7 @@ export const AppProvider = ({ children }) => {
   // Función para reestablecer la lista.
   const handleReset = async () => {
     const previousList = [...lista];
-    // Borrar todos los registros que no tengan ese UUID
+    // Borra todos los registros que no tengan ese UUID.
     const { error } = await supabase.from('todos').delete().neq('id', '00000000-0000-0000-0000-000000000000');
 
     if (error) {
