@@ -10,7 +10,7 @@ import ItemList from '../components/to-do-list-API/ItemList';
 import { supabase } from '../supabaseClient';
 
 function ToDoListAPI({ isEditing = false }) {
-  const { fetchTasks, lista, setLista, handleEdit } = useContext(AppContext);
+  const { fetchTasks, lista, setLista, handleEdit, handleReset } = useContext(AppContext);
   const [filtro, setFiltro] = useState('all');
   const [selectedItemId, setSelectedItemId] = useState(null);
 
@@ -34,24 +34,6 @@ function ToDoListAPI({ isEditing = false }) {
       );
       setLista(nuevaLista);
       console.table(nuevaLista);
-    }
-  };
-
-  // Función para reestablecer la lista.
-  const handleReset = async () => {
-    const anteriorLista = [...lista];
-    const { error } = await supabase.from('todos').delete().neq('id', 0); // Borra todos los registros
-
-    if (error) {
-      toast.error('Failed to clear the list');
-    } else {
-      setLista([]);
-      toast.success('All your items were cleared!', {
-        action: {
-          label: 'Undo',
-          onClick: () => setLista(anteriorLista),
-        },
-      });
     }
   };
 

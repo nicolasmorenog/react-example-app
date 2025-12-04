@@ -102,8 +102,42 @@ export const AppProvider = ({ children }) => {
     }
   };
 
+  // Función para reestablecer la lista.
+  const handleReset = async () => {
+    const previousList = [...lista];
+    const { error } = await supabase.from('todos').delete().neq('id', 0); // Borra todos los registros
+
+    if (error) {
+      toast.error('Failed to clear the list');
+    } else {
+      setLista([]);
+      toast.success('All your items were cleared!', {
+        action: {
+          label: 'Undo',
+          onClick: async () => {
+            const itemsToRestore = previousList.map(({ id, name, createdAt, updatedAt, completedAt }) => ({
+              id,
+              name,
+              created_at: createdAt,
+              updated_at: updatedAt,
+              completed_at: completedAt,
+            }));
+            const { error: restoreError } = await supabase.from('todos').insert(itemsToRestore);
+
+            if (restoreError) {
+              toast.error("Couldn't restore the items.");
+            } else {
+              setLista(previousList);
+              toast.success('Your items were restored!');
+            }
+          },
+        },
+      });
+    }
+  };
+
   return (
-    <AppContext.Provider value={{ fetchTasks, lista, setLista, handleAddItem, handleDelete, handleEdit }}>
+    <AppContext.Provider value={{ fetchTasks, lista, setLista, handleAddItem, handleDelete, handleEdit, handleReset }}>
       {children}
     </AppContext.Provider>
   );
