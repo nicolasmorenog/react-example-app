@@ -7,13 +7,12 @@ import { AppContext } from '@/context/AppContext';
 function Item({
   item, //Undefined --> MODO CREAR | Objeto --> MODO LISTA
   handleToggle,
-  handleDelete,
   handleEdit,
   selectedItemId,
   setSelectedItemId,
   isEditing,
 }) {
-  const { handleAddItem } = useContext(AppContext);
+  const { handleAddItem, handleDelete } = useContext(AppContext);
 
   // Hooks.
   const navigate = useNavigate();
