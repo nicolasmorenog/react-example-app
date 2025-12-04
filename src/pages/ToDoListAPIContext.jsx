@@ -211,37 +211,39 @@ function ToDoListAPI({ isEditing = false }) {
           setSelectedItemId={setSelectedItemId}
           isEditing={isEditing}
         />
-        {filteredList.length > rowsPerPage && (
-          <div className="pagination">
-            {filteredList.slice(firstIndex - rowsPerPage, lastIndex - rowsPerPage).length > 0 ? (
-              <button onClick={() => setCurrentPage(currentPage - 1)}>&lt; Previous</button>
-            ) : (
-              <button className="inactive-button" disabled>
-                &lt; Previous
-              </button>
-            )}
-            {currentPage > 1 && <button className="adjacent-page">{currentPage - 1}</button>}
-            <button className="pagination-current-page">{currentPage}</button>
-            {filteredList.slice(firstIndex + 10, lastIndex + 10).length > 0 && (
-              <button className="adjacent-page">{currentPage + 1}</button>
-            )}
-            {filteredList.slice(firstIndex + 10, lastIndex + 10).length > 0 ? (
-              <button onClick={() => setCurrentPage(currentPage + 1)}>Next &gt;</button>
-            ) : (
-              <button className="inactive-button" disabled>
-                Next &gt;
-              </button>
-            )}
+        <div className="pagination-controls">
+          <div className="rows-per-page-selector">
+            <span>Rows per page: </span>
+            <select className="rows-per-page-dropdown" value={rowsPerPage} onChange={handleRowsPerPageChange}>
+              <option value={6}>6</option>
+              <option value={10}>10</option>
+              <option value={20}>20</option>
+              <option value={50}>50</option>
+            </select>
           </div>
-        )}
-        <div>
-          <span>Rows per page: </span>
-          <select value={rowsPerPage} onChange={handleRowsPerPageChange}>
-            <option value={6}>6</option>
-            <option value={10}>10</option>
-            <option value={20}>20</option>
-            <option value={50}>50</option>
-          </select>
+          {filteredList.length > rowsPerPage && (
+            <div className="pagination">
+              {filteredList.slice(firstIndex - rowsPerPage, lastIndex - rowsPerPage).length > 0 ? (
+                <button onClick={() => setCurrentPage(currentPage - 1)}>&lt; Previous</button>
+              ) : (
+                <button className="inactive-button" disabled>
+                  &lt; Previous
+                </button>
+              )}
+              {currentPage > 1 && <button className="adjacent-page">{currentPage - 1}</button>}
+              <button className="pagination-current-page">{currentPage}</button>
+              {filteredList.slice(firstIndex + 10, lastIndex + 10).length > 0 && (
+                <button className="adjacent-page">{currentPage + 1}</button>
+              )}
+              {filteredList.slice(firstIndex + 10, lastIndex + 10).length > 0 ? (
+                <button onClick={() => setCurrentPage(currentPage + 1)}>Next &gt;</button>
+              ) : (
+                <button className="inactive-button" disabled>
+                  Next &gt;
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
