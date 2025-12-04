@@ -10,7 +10,7 @@ import ItemList from '../components/to-do-list-API/ItemList';
 import { supabase } from '../supabaseClient';
 
 function ToDoListAPI({ isEditing = false }) {
-  const { fetchTasks, lista, setLista } = useContext(AppContext);
+  const { fetchTasks, lista, setLista, handleEdit } = useContext(AppContext);
   const [filtro, setFiltro] = useState('all');
   const [selectedItemId, setSelectedItemId] = useState(null);
 
@@ -34,20 +34,6 @@ function ToDoListAPI({ isEditing = false }) {
       );
       setLista(nuevaLista);
       console.table(nuevaLista);
-    }
-  };
-
-  // Función para editar item.
-  const handleEdit = async (id, newName) => {
-    const now = new Date().toISOString();
-    const { error } = await supabase.from('todos').update({ name: newName, updated_at: now }).eq('id', id);
-
-    if (error) {
-      toast.error('Failed to edit item.');
-    } else {
-      const nuevaLista = lista.map((item) => (item.id === id ? { ...item, name: newName, updatedAt: now } : item));
-      setLista(nuevaLista);
-      toast.success(`Item "${newName}" was saved!`);
     }
   };
 

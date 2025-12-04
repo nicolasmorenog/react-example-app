@@ -88,8 +88,22 @@ export const AppProvider = ({ children }) => {
     }
   };
 
+  // Función para editar item.
+  const handleEdit = async (id, newName) => {
+    const now = new Date().toISOString();
+    const { error } = await supabase.from('todos').update({ name: newName, updated_at: now }).eq('id', id);
+
+    if (error) {
+      toast.error('Failed to edit item.');
+    } else {
+      const nuevaLista = lista.map((item) => (item.id === id ? { ...item, name: newName, updatedAt: now } : item));
+      setLista(nuevaLista);
+      toast.success(`Item "${newName}" was saved!`);
+    }
+  };
+
   return (
-    <AppContext.Provider value={{ fetchTasks, lista, setLista, handleAddItem, handleDelete }}>
+    <AppContext.Provider value={{ fetchTasks, lista, setLista, handleAddItem, handleDelete, handleEdit }}>
       {children}
     </AppContext.Provider>
   );
