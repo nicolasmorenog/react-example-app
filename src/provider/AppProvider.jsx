@@ -8,8 +8,11 @@ export const AppProvider = ({ children }) => {
   const [lista, setLista] = useState([]);
 
   // Obtenemos las tareas de Supabase.
-  const fetchTasks = async () => {
-    const { data: todos, error } = await supabase.from('todos').select('*').order('created_at');
+  const fetchTasks = async (orderBy = { column: 'created_at', ascending: true }) => {
+    const { data: todos, error } = await supabase
+      .from('todos')
+      .select('*')
+      .order(orderBy.column, { ascending: orderBy.ascending });
 
     if (error) {
       console.error('Error fetching tasks:', error);

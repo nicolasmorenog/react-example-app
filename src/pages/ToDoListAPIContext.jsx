@@ -14,10 +14,23 @@ function ToDoListAPI({ isEditing = false }) {
   const [filtro, setFiltro] = useState('all');
   const [selectedItemId, setSelectedItemId] = useState(null);
 
+  // Ordenación.
+  const [sortOrder, setSortOrder] = useState('createdAt-desc');
+
   // useEffect para cargar las tareas al iniciar el componente.
   useEffect(() => {
-    fetchTasks();
-  }, []);
+    // Mapeo de nombres del front al back.
+    const columnMapping = {
+      createdAt: 'created_at',
+      updatedAt: 'updated_at',
+      name: 'name',
+    };
+
+    const [sortColumn, sortDirection] = sortOrder.split('-');
+    const column = columnMapping[sortColumn];
+    const ascending = sortDirection === 'asc';
+    fetchTasks({ column, ascending });
+  }, [sortOrder]); // Se ejecuta cada vez que cambia el orden
 
   // Checkbox de completado.
   const handleToggle = async (id) => {
@@ -109,6 +122,17 @@ function ToDoListAPI({ isEditing = false }) {
           <IconReload stroke={2} />
           Reset
         </button>
+      </div>
+      <div className="sort-container">
+        <label>Order by: </label>
+        <select id="sort-select" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
+          <option value="createdAt-asc">First Created</option>
+          <option value="createdAt-desc">Last Created</option>
+          <option value="name-asc">Alphabetical (A-Z)</option>
+          <option value="name-desc">Alphabetical (Z-A)</option>
+          <option value="updatedAt-asc">First Modified</option>
+          <option value="updatedAt-desc">Last Modified</option>
+        </select>
       </div>
       <div className="item-list">
         <ItemList
