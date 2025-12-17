@@ -5,8 +5,8 @@ const Sidebar = () => {
         <h2>Marcadores</h2>
         <p>Descripción</p>
       </div>
-      <div className= "input-container">
-        <input className="input" type="text" placeholder="Buscar" />
+      <div className="input-container">
+        <input id="search-input" name="search" className="input" type="text" placeholder="Buscar" />
       </div>
       <div className="sidebar-content">
         <h3>Lugar</h3>
