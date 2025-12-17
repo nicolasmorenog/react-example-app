@@ -37,6 +37,9 @@ const Layout = () => {
           <Link style={padding} to="/unicafe">
             Unicafe
           </Link>
+          <Link style={padding} to="/mapa-google">
+            Mapa Google
+          </Link>
         </nav>
         <hr className="nav-hr" />
       </div>

@@ -14,6 +14,7 @@ const ListaCompra = lazy(() => import('./pages/ListaCompra'));
 const ToDoListAPIContext = lazy(() => import('./pages/ToDoListAPIContext'));
 const Part1 = lazy(() => import('./pages/Part1'));
 const Unicafe = lazy(() => import('./pages/Unicafe'));
+const MapaGoogle = lazy(() => import('./pages/MapaGoogle'));
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
             <Route path="/part1" element={<Part1 />} />
             <Route path="/counter" element={<Counter />} />
             <Route path="/unicafe" element={<Unicafe />} />
+            <Route path="/mapa-google" element={<MapaGoogle />} />
           </Route>
         </Routes>
       </Suspense>
