@@ -6,4 +6,7 @@
     "source.fixAll.eslint": "explicit",
   },
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
 }
