@@ -15,9 +15,7 @@ const MapView = () => {
     mapIds: [MY_MAP_ID],
   });
 
-  if (!isLoaded) return <div className="map">Cargando mapa...</div>;
-
-  return (
+  return isLoaded ? (
     <GoogleMap
       mapContainerClassName="map"
       center={center}
@@ -28,6 +26,8 @@ const MapView = () => {
         mapTypeControl: false,
       }}
     ></GoogleMap>
+  ) : (
+    <div className="map">Cargando mapa...</div>
   );
 };
 
