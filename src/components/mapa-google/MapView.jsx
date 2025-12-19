@@ -1,7 +1,6 @@
 'use client';
 
 import { APIProvider, Map, AdvancedMarker, Pin } from '@vis.gl/react-google-maps';
-import { IconPlaneDeparture } from '@tabler/icons-react';
 
 const center = {
   // coordenadas de Madrid
@@ -26,7 +25,7 @@ const MapView = ({ isDarkMode }) => {
           colorScheme={isDarkMode ? 'DARK' : 'LIGHT'}
         >
           <AdvancedMarker position={airport}>
-            <IconPlaneDeparture color="red" stroke={2} />
+            <Pin background={'black'} borderColor={'white'} glyphColor={'white'} />
           </AdvancedMarker>
         </Map>
       </div>
