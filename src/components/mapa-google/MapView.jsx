@@ -1,11 +1,18 @@
 'use client';
 
-import { APIProvider, Map } from '@vis.gl/react-google-maps';
+import { APIProvider, Map, AdvancedMarker, Pin } from '@vis.gl/react-google-maps';
+import { IconPlaneDeparture } from '@tabler/icons-react';
 
 const center = {
   // coordenadas de Madrid
   lat: 40.416775,
   lng: -3.70379,
+};
+
+const airport = {
+  // coordenadas del Aeropuerto de Adolfo Suárez Madrid-Barajas
+  lat: 40.4719,
+  lng: -3.5526,
 };
 
 const MapView = ({ isDarkMode }) => {
@@ -17,7 +24,11 @@ const MapView = ({ isDarkMode }) => {
           defaultZoom={11}
           defaultCenter={center}
           colorScheme={isDarkMode ? 'DARK' : 'LIGHT'}
-        ></Map>
+        >
+          <AdvancedMarker position={airport}>
+            <IconPlaneDeparture color="green" stroke={2} />
+          </AdvancedMarker>
+        </Map>
       </div>
     </APIProvider>
   );
