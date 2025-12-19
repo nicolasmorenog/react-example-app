@@ -57,3 +57,22 @@
   background-color: rgba(255, 255, 255, 0.1);
   color: white;
 }
+
+.theme-toggle-button {
+  width: '100%';
+  padding: '10px';
+  border-radius: '8px';
+  cursor: 'pointer';
+  font-weight: 'bold';
+  background-color: #152341;
+  color: white;
+}
+
+.theme-toggle-btn.dark {
+  background-color: #f0f0f0;
+  color: #152341;
+}
+
+.theme-toggle-btn:hover {
+  opacity: 0.9;
+}
