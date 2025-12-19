@@ -8,13 +8,11 @@ const center = {
   lng: -3.70379,
 };
 
-// const MY_MAP_ID = 'e3e91f42e60dbb148da20095';
-
 const MapView = () => {
   return (
     <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
       <div className="map-frame">
-        <Map defaultZoom={10} defaultCenter={center}></Map>
+        <Map mapId={import.meta.env.VITE_MAP_ID} defaultZoom={10} defaultCenter={center}></Map>
       </div>
     </APIProvider>
   );
