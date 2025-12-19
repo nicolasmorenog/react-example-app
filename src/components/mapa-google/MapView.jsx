@@ -26,7 +26,7 @@ const MapView = ({ isDarkMode }) => {
           colorScheme={isDarkMode ? 'DARK' : 'LIGHT'}
         >
           <AdvancedMarker position={airport}>
-            <IconPlaneDeparture color="green" stroke={2} />
+            <IconPlaneDeparture color="red" stroke={2} />
           </AdvancedMarker>
         </Map>
       </div>
