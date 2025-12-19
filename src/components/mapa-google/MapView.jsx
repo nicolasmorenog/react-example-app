@@ -1,4 +1,6 @@
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+'use client';
+
+import { APIProvider, Map } from '@vis.gl/react-google-maps';
 
 const center = {
   // coordenadas de Madrid
@@ -6,28 +8,15 @@ const center = {
   lng: -3.70379,
 };
 
-const MY_MAP_ID = 'e3e91f42e60dbb148da20095';
+// const MY_MAP_ID = 'e3e91f42e60dbb148da20095';
 
 const MapView = () => {
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
-    mapIds: [MY_MAP_ID],
-  });
-
-  return isLoaded ? (
-    <GoogleMap
-      mapContainerClassName="map"
-      center={center}
-      zoom={10}
-      mapId={MY_MAP_ID}
-      options={{
-        streetViewControl: false,
-        mapTypeControl: false,
-      }}
-    ></GoogleMap>
-  ) : (
-    <div className="map">Cargando mapa...</div>
+  return (
+    <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
+      <div className="map">
+        <Map defaultZoom={10} defaultCenter={center}></Map>
+      </div>
+    </APIProvider>
   );
 };
 
