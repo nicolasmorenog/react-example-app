@@ -5,7 +5,7 @@ import MapView from '@/components/mapa-google/MapView';
 import '@/styles/mapa-google/layout.css';
 
 const MapaGoogle = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
