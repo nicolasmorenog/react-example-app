@@ -8,11 +8,16 @@ const center = {
   lng: -3.70379,
 };
 
-const MapView = () => {
+const MapView = ({ isDarkMode }) => {
   return (
     <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
       <div className="map-frame">
-        <Map mapId={import.meta.env.VITE_MAP_ID} defaultZoom={10} defaultCenter={center}></Map>
+        <Map
+          mapId={import.meta.env.VITE_MAP_ID}
+          defaultZoom={10}
+          defaultCenter={center}
+          colorScheme={isDarkMode ? 'DARK' : 'LIGHT'}
+        ></Map>
       </div>
     </APIProvider>
   );
