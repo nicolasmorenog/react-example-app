@@ -76,3 +76,16 @@
 .theme-toggle-btn:hover {
   opacity: 0.9;
 }
+
+.infowindow-content {
+  color: white;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.infowindow-content h3 {
+  color: black;
+  margin: 0 0 5px 0;
+  font-weight: bold;
+  font-size: 16px;
+}
