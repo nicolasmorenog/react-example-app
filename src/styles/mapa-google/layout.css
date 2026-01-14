@@ -52,18 +52,36 @@
   background-color: white;
 }
 
+.sidebar-static-title {
+  padding: 0 20px;
+  text-align: left !important;
+  margin-left: 14px;
+}
+
+.sidebar-static-title h2 {
+  margin: 0 !important;
+  font-size: 1.5rem;
+  text-align: left !important;
+}
+
 .sidebar-content {
   flex: 1;
-  padding: 20px;
+  padding: 0 20px 20px 20px;
   background-color: white;
   color: grey;
+  text-align: left !important;
+}
+.location-card {
+  padding: 15px;
+  border-bottom: 1px solid grey;
+  text-align: left !important;
 }
 
 .input-container {
   background-color: #152341;
   border-radius: 8px;
   margin: 0 20px 20px 20px;
-  padding: 15px;
+  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,7 +96,7 @@
   color: white;
 }
 
-.theme-toggle-button {
+.theme-toggle-btn {
   width: '100%';
   padding: '10px';
   border-radius: '8px';

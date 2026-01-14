@@ -32,7 +32,6 @@ const Sidebar = ({ isDarkMode, toggleTheme, onSearch, locations }) => {
             {isDarkMode ? '☀️ Modo Claro' : '🌙 Modo Oscuro'}
           </button>
         </div>
-        <h2>Marcadores</h2>
       </div>
       <div className="input-container">
         <input
@@ -46,9 +45,12 @@ const Sidebar = ({ isDarkMode, toggleTheme, onSearch, locations }) => {
           onChange={handleInputChange}
         />
       </div>
+      <div className="sidebar-static-title">
+        <h2>Resultados:</h2>
+      </div>
       <div className="sidebar-content" style={{ overflowY: 'auto' }}>
         {filteredLocations.map((loc) => (
-          <div style={{ padding: '15px', borderBottom: '1px solid' }} key={loc.id}>
+          <div className="location-card" key={loc.id}>
             <h4>{loc.name}</h4>
             <p>{loc.address}</p>
           </div>
