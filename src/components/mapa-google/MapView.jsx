@@ -11,7 +11,6 @@ const MapView = ({ isDarkMode, locations }) => {
   };
 
   const [selected, setSelected] = useState(null);
-  const [open, setOpen] = useState(false);
 
   return (
     <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
@@ -23,7 +22,7 @@ const MapView = ({ isDarkMode, locations }) => {
           colorScheme={isDarkMode ? 'DARK' : 'LIGHT'}
         >
           {locations.map((loc) => (
-            <AdvancedMarker key={loc.id} position={{ lat: loc.lat, lng: loc.lat }} onClick={() => setOpen(true)}>
+            <AdvancedMarker key={loc.id} position={{ lat: loc.lat, lng: loc.lng }} onClick={() => setSelected(loc)}>
               <Pin
                 background={loc.status === 'active' ? '#4CAF50' : '#F44336'}
                 borderColor={'white'}
