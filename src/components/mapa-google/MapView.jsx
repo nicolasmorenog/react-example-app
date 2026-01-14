@@ -17,7 +17,7 @@ const MapView = ({ isDarkMode, locations }) => {
       <div className="map-frame">
         <Map
           mapId={import.meta.env.VITE_MAP_ID}
-          defaultZoom={11}
+          defaultZoom={13}
           defaultCenter={center}
           colorScheme={isDarkMode ? 'DARK' : 'LIGHT'}
         >
