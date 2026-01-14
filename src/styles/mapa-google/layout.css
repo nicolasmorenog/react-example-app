@@ -15,7 +15,7 @@
   overflow: hidden;
 }
 
-.map-frame button[aria-label="Close"], 
+.map-frame button[aria-label='Close'],
 .map-frame button.gm-ui-hover-effect {
   padding: 0 !important;
   margin: 4px !important;
@@ -28,7 +28,7 @@
   justify-content: center;
 }
 
-.map-frame button[aria-label="Close"] span,
+.map-frame button[aria-label='Close'] span,
 .map-frame button.gm-ui-hover-effect span {
   width: 18px !important;
   height: 18px !important;
@@ -108,13 +108,15 @@
 .infowindow-content h3 {
   color: black;
   margin: 0 0 4px 0 !important;
+  padding-bottom: 5px;
   font-weight: bold;
   font-size: 16px;
   text-align: left !important;
+  border-bottom: 1px solid grey;
 }
 
 .infowindow-content p {
-  margin:0 0 2px 0 !important;
+  margin: 0 0 2px 0 !important;
   font-size: 12px !important;
   color: #555;
   text-align: left !important;
@@ -122,7 +124,7 @@
 
 .status-badge-inactive {
   background-color: rgba(244, 67, 54, 0.1);
-  border: 1px solid rgba(244, 67, 54, 0.3); 
+  border: 1px solid rgba(244, 67, 54, 0.3);
   padding: 8px 12px;
   border-radius: 8px;
   margin-top: 10px;
