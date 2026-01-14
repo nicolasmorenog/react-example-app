@@ -2,6 +2,8 @@ import { useState } from 'react';
 import Sidebar from '@/components/mapa-google/Sidebar';
 import MapView from '@/components/mapa-google/MapView';
 
+import { locations } from '@/components/mapa-google/locations';
+
 import '@/styles/mapa-google/layout.css';
 
 const MapaGoogle = () => {
