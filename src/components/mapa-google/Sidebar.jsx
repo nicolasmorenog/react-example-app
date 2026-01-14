@@ -39,9 +39,13 @@ const Sidebar = ({ isDarkMode, toggleTheme, onSearch, locations }) => {
           onChange={handleInputChange}
         />
       </div>
-      <div className="sidebar-content">
-        <h3>Lugar</h3>
-        <p>Dirección</p>
+      <div className="sidebar-content" style={{ overflowY: 'auto' }}>
+        {locations.map((loc) => (
+          <div style={{ padding: '15px', borderBottom: '1px solid' }} key={loc.id}>
+            <h4>{loc.name}</h4>
+            <p>{loc.address}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
