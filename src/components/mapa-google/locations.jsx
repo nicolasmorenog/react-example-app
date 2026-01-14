@@ -4,7 +4,7 @@ export const locations = [
     name: 'Puerta del Sol',
     lat: 40.4169,
     lng: -3.7035,
-    status: 'activo',
+    status: 'active',
     address: 'Plaza de la Puerta del Sol, s/n',
   },
   {
@@ -12,7 +12,7 @@ export const locations = [
     name: 'Parque del Retiro',
     lat: 40.4153,
     lng: -3.6844,
-    status: 'mantenimiento',
+    status: 'inactive',
     address: 'Plaza de la Independencia, 7',
   },
   {
@@ -20,7 +20,7 @@ export const locations = [
     name: 'Plaza Mayor',
     lat: 40.4155,
     lng: -3.7074,
-    status: 'activo',
+    status: 'active',
     address: 'Plaza Mayor, Madrid',
   },
   {
@@ -28,7 +28,7 @@ export const locations = [
     name: 'Museo del Prado',
     lat: 40.4137,
     lng: -3.6921,
-    status: 'mantenimiento',
+    status: 'active',
     address: 'Calle de Ruiz de Alarcón, 23',
   },
 ];

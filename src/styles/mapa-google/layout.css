@@ -119,3 +119,14 @@
   color: #555;
   text-align: left !important;
 }
+
+.status-badge-inactive {
+  background-color: rgba(244, 67, 54, 0.1);
+  border: 1px solid rgba(244, 67, 54, 0.3); 
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-size: 12px;
+  gap: 8px;
+  line-height: 1.3;
+}

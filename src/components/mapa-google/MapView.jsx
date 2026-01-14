@@ -17,14 +17,14 @@ const MapView = ({ isDarkMode, locations }) => {
       <div className="map-frame">
         <Map
           mapId={import.meta.env.VITE_MAP_ID}
-          defaultZoom={13.5}
+          defaultZoom={14}
           defaultCenter={center}
           colorScheme={isDarkMode ? 'DARK' : 'LIGHT'}
         >
           {locations.map((loc) => (
             <AdvancedMarker key={loc.id} position={{ lat: loc.lat, lng: loc.lng }} onClick={() => setSelected(loc)}>
               <Pin
-                background={loc.status === 'active' ? '#4CAF50' : '#F44336'}
+                background={loc.status === 'active' ? '#F44336' : '#f443367c'}
                 borderColor={'white'}
                 glyphColor={'white'}
               />
@@ -35,8 +35,12 @@ const MapView = ({ isDarkMode, locations }) => {
             <InfoWindow position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => setSelected(null)}>
               <div className="infowindow-content">
                 <h3>{selected.name}</h3>
-                <p>Estado: {selected.status}</p>
                 <p>{selected.address}</p>
+                {selected.status === 'inactive' && (
+                  <div className="status-badge-inactive">
+                    <p>⚠️ Esta ubicación se encuentra actualmente en mantenimiento!</p>
+                  </div>
+                )}
               </div>
             </InfoWindow>
           )}
