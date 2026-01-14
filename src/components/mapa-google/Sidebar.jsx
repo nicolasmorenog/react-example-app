@@ -3,6 +3,13 @@ import { useState } from 'react';
 const Sidebar = ({ isDarkMode, toggleTheme, onSearch, locations }) => {
   const [searchValue, setSearchValue] = useState('');
 
+  // filtrado
+  const filteredLocations = locations.filter((loc) => {
+    const nameMatch = loc.name.toLowerCase().includes(searchValue.toLowerCase());
+    const idMatch = loc.id.toString().includes(searchValue);
+    return nameMatch || idMatch;
+  });
+
   const handleInputChange = (e) => {
     const value = e.target.value;
     setSearchValue(value);
@@ -26,11 +33,11 @@ const Sidebar = ({ isDarkMode, toggleTheme, onSearch, locations }) => {
           </button>
         </div>
         <h2>Marcadores</h2>
-        <p>Descripción</p>
       </div>
       <div className="input-container">
         <input
           id="search-input"
+          autoComplete="off"
           name="search"
           className="input"
           type="text"
@@ -40,7 +47,7 @@ const Sidebar = ({ isDarkMode, toggleTheme, onSearch, locations }) => {
         />
       </div>
       <div className="sidebar-content" style={{ overflowY: 'auto' }}>
-        {locations.map((loc) => (
+        {filteredLocations.map((loc) => (
           <div style={{ padding: '15px', borderBottom: '1px solid' }} key={loc.id}>
             <h4>{loc.name}</h4>
             <p>{loc.address}</p>
