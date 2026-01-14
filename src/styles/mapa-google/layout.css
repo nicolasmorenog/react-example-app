@@ -15,6 +15,26 @@
   overflow: hidden;
 }
 
+.map-frame button[aria-label="Close"], 
+.map-frame button.gm-ui-hover-effect {
+  padding: 0 !important;
+  margin: 4px !important;
+  border: none !important;
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-frame button[aria-label="Close"] span,
+.map-frame button.gm-ui-hover-effect span {
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 !important;
+}
+
 .sidebar {
   display: flex;
   width: 400px;
@@ -79,13 +99,23 @@
 
 .infowindow-content {
   color: white;
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 13px;
+  line-height: 1.2;
+  padding: 5px;
+  max-width: 200px;
 }
 
 .infowindow-content h3 {
   color: black;
-  margin: 0 0 5px 0;
+  margin: 0 0 4px 0 !important;
   font-weight: bold;
   font-size: 16px;
+  text-align: left !important;
+}
+
+.infowindow-content p {
+  margin:0 0 2px 0 !important;
+  font-size: 12px !important;
+  color: #555;
+  text-align: left !important;
 }

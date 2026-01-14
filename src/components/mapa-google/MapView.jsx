@@ -17,7 +17,7 @@ const MapView = ({ isDarkMode, locations }) => {
       <div className="map-frame">
         <Map
           mapId={import.meta.env.VITE_MAP_ID}
-          defaultZoom={13}
+          defaultZoom={13.5}
           defaultCenter={center}
           colorScheme={isDarkMode ? 'DARK' : 'LIGHT'}
         >
@@ -35,9 +35,7 @@ const MapView = ({ isDarkMode, locations }) => {
             <InfoWindow position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => setSelected(null)}>
               <div className="infowindow-content">
                 <h3>{selected.name}</h3>
-                <p>
-                  Estado: <strong>{selected.status}</strong>
-                </p>
+                <p>Estado: {selected.status}</p>
                 <p>{selected.address}</p>
               </div>
             </InfoWindow>
