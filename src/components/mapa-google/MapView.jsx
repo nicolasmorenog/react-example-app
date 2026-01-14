@@ -3,19 +3,14 @@
 import { useState } from 'react';
 import { APIProvider, Map, AdvancedMarker, Pin, InfoWindow } from '@vis.gl/react-google-maps';
 
-const MapView = ({ isDarkMode }) => {
+const MapView = ({ isDarkMode, locations }) => {
   const center = {
     // coordenadas de Madrid
     lat: 40.416775,
     lng: -3.70379,
   };
 
-  const airport = {
-    // coordenadas del Aeropuerto Adolfo Suárez Madrid-Barajas
-    lat: 40.4719,
-    lng: -3.5526,
-  };
-
+  const [selected, setSelected] = useState(null);
   const [open, setOpen] = useState(false);
 
   return (
@@ -27,13 +22,25 @@ const MapView = ({ isDarkMode }) => {
           defaultCenter={center}
           colorScheme={isDarkMode ? 'DARK' : 'LIGHT'}
         >
-          <AdvancedMarker position={airport} onClick={() => setOpen(true)}>
-            <Pin background={'black'} borderColor={'white'} glyphColor={'white'} />
-          </AdvancedMarker>
-
-          {open && (
-            <InfoWindow className="infowindow-content" position={airport} onCloseClick={() => setOpen(false)}>
-              <h3>Aeropuerto Adolfo Suárez Madrid-Barajas</h3>
+          {locations.map((loc) => (
+            <AdvancedMarker key={loc.id} position={{ lat: loc.lat, lng: loc.lat }} onClick={() => setOpen(true)}>
+              <Pin
+                background={loc.status === 'active' ? '#4CAF50' : '#F44336'}
+                borderColor={'white'}
+                glyphColor={'white'}
+              />
+            </AdvancedMarker>
+          ))}
+          ;
+          {selected && (
+            <InfoWindow position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => setSelected(null)}>
+              <div className="infowindow-content">
+                <h3>{selected.name}</h3>
+                <p>
+                  Estado: <strong>{selected.status}</strong>
+                </p>
+                <p>{selected.address}</p>
+              </div>
             </InfoWindow>
           )}
         </Map>

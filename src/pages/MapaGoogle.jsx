@@ -8,14 +8,17 @@ import '@/styles/mapa-google/layout.css';
 
 const MapaGoogle = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const [selectedLocation, setSelectedLocation] = useState(null);
 
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-  };
   return (
     <div className="map-container">
-      <MapView isDarkMode={isDarkMode} />
-      <Sidebar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+      <MapView isDarkMode={isDarkMode} selectedLocation={selectedLocation} locations={locations} />
+      <Sidebar
+        isDarkMode={isDarkMode}
+        toggleTheme={() => setIsDarkMode(!isDarkMode)}
+        onSearch={(loc) => setSelectedLocation(loc)}
+        locations={locations}
+      />
     </div>
   );
 };

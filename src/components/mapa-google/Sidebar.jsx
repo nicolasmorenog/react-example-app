@@ -1,4 +1,22 @@
-const Sidebar = ({ isDarkMode, toggleTheme }) => {
+import { useState } from 'react';
+
+const Sidebar = ({ isDarkMode, toggleTheme, onSearch, locations }) => {
+  const [searchValue, setSearchValue] = useState('');
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setSearchValue(value);
+
+    // buscamos coincidencias por ID o por nombre
+    const found = locations.find((loc) => loc.id === value || loc.name.toLowerCase().includes(value.toLowerCase()));
+
+    if (found && value !== '') {
+      onSearch(found);
+    } else if (value === '') {
+      onSearch(null);
+    }
+  };
+
   return (
     <div className="sidebar">
       <div className="sidebar-header">
@@ -11,7 +29,15 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
         <p>Descripción</p>
       </div>
       <div className="input-container">
-        <input id="search-input" name="search" className="input" type="text" placeholder="Buscar" />
+        <input
+          id="search-input"
+          name="search"
+          className="input"
+          type="text"
+          placeholder="Buscar por nombre o ID..."
+          value={searchValue}
+          onChange={handleInputChange}
+        />
       </div>
       <div className="sidebar-content">
         <h3>Lugar</h3>
