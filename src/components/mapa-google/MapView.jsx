@@ -1,10 +1,24 @@
 'use client';
 
-import { useState } from 'react';
-import { APIProvider, Map, AdvancedMarker, Pin, InfoWindow } from '@vis.gl/react-google-maps';
+import { useState, useEffect } from 'react';
+import { APIProvider, Map, AdvancedMarker, Pin, InfoWindow, useMap } from '@vis.gl/react-google-maps';
 
-const MapView = ({ isDarkMode, locations }) => {
-  const center = {
+const MapHandler = ({ selectedLocation }) => {
+  const map = useMap();
+
+  useEffect(() => {
+    if (map && selectedLocation) {
+      map.setZoom(14);
+      setTimeout(() => {
+        map.panTo({ lat: selectedLocation.lat, lng: selectedLocation.lng });
+        map.setZoom(15.5);
+      }, 400);
+    }
+  }, [map, selectedLocation]);
+};
+
+const MapView = ({ isDarkMode, locations, selectedLocation }) => {
+  const defaultCenter = {
     // coordenadas de Madrid
     lat: 40.416775,
     lng: -3.70379,
@@ -12,15 +26,25 @@ const MapView = ({ isDarkMode, locations }) => {
 
   const [selected, setSelected] = useState(null);
 
+  // const [openInfo, setOpenInfo] = useState(null);
+
+  // useEffect(() => {
+  //   if (selectedLocation) {
+  //     setOpenInfo(selectedLocation);
+  //   }
+  // }, [selectedLocation]);
+
   return (
     <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
       <div className="map-frame">
         <Map
           mapId={import.meta.env.VITE_MAP_ID}
           defaultZoom={14}
-          defaultCenter={center}
+          defaultCenter={defaultCenter}
           colorScheme={isDarkMode ? 'DARK' : 'LIGHT'}
+          gestureHandling={'greedy'}
         >
+          <MapHandler selectedLocation={selectedLocation} />
           {locations.map((loc) => (
             <AdvancedMarker key={loc.id} position={{ lat: loc.lat, lng: loc.lng }} onClick={() => setSelected(loc)}>
               <Pin

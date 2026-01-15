@@ -50,7 +50,7 @@ const Sidebar = ({ isDarkMode, toggleTheme, onSearch, locations }) => {
       </div>
       <div className="sidebar-content" style={{ overflowY: 'auto' }}>
         {filteredLocations.map((loc) => (
-          <div className="location-card" key={loc.id}>
+          <div className="location-card" key={loc.id} onClick={() => onSearch(loc)}>
             <h4>{loc.name}</h4>
             <p>{loc.address}</p>
           </div>
