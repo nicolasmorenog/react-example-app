@@ -51,6 +51,13 @@ const Sidebar = ({ isDarkMode, toggleTheme, onSearch, locations, selectedLocatio
           >
             <h4>{loc.name}</h4>
             <p>{loc.address}</p>
+            {loc.status === 'inactive' && (
+              <div className="status-badge-inactive">
+                <strong>
+                  <p>⚠️ Temporalmente fuera de servicio.</p>
+                </strong>
+              </div>
+            )}
           </div>
         ))}
       </div>
