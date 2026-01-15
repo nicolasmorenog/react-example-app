@@ -14,14 +14,8 @@ const Sidebar = ({ isDarkMode, toggleTheme, onSearch, locations }) => {
     const value = e.target.value;
     setSearchValue(value);
 
-    // buscamos coincidencias por ID o por nombre
-    const found = locations.find((loc) => loc.id === value || loc.name.toLowerCase().includes(value.toLowerCase()));
-
-    if (found && value !== '') {
-      onSearch(found);
-    } else if (value === '') {
-      onSearch(null);
-    }
+    // si el usuario empieza a escribir, reseteamos la selección natural para cerrar info windows
+    onSearch(null);
   };
 
   return (

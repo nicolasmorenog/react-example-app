@@ -30,6 +30,9 @@ const MapView = ({ isDarkMode, locations, selectedLocation }) => {
 
   // si selecciono un location card en el sidebar, se abre su info window automáticamente
   useEffect(() => {
+    // cerramos la ventana actual
+    setSelected(null);
+
     if (selectedLocation) {
       // timeout para que no aparezca el infowindow hasta que haya hecho el zoom
       setTimeout(() => {
