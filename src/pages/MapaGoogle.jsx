@@ -12,7 +12,12 @@ const MapaGoogle = () => {
 
   return (
     <div className="map-container">
-      <MapView isDarkMode={isDarkMode} selectedLocation={selectedLocation} locations={locations} />
+      <MapView
+        isDarkMode={isDarkMode}
+        selectedLocation={selectedLocation}
+        locations={locations}
+        onSelect={(loc) => setSelectedLocation(loc)}
+      />
       <Sidebar
         isDarkMode={isDarkMode}
         toggleTheme={() => setIsDarkMode(!isDarkMode)}

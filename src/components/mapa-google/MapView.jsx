@@ -19,24 +19,21 @@ const MapHandler = ({ selectedLocation }) => {
   return null;
 };
 
-const MapView = ({ isDarkMode, locations, selectedLocation }) => {
+const MapView = ({ isDarkMode, locations, selectedLocation, onSelect }) => {
   const defaultCenter = {
     // coordenadas de Madrid
     lat: 40.416775,
     lng: -3.70379,
   };
 
-  const [selected, setSelected] = useState(null);
+  const [showInfo, setShowInfo] = useState(false);
 
-  // si selecciono un location card en el sidebar, se abre su info window automáticamente
   useEffect(() => {
-    // cerramos la ventana actual
-    setSelected(null);
+    setShowInfo(false);
 
     if (selectedLocation) {
-      // timeout para que no aparezca el infowindow hasta que haya hecho el zoom
       setTimeout(() => {
-        setSelected(selectedLocation);
+        setShowInfo(true);
       }, 600);
     }
   }, [selectedLocation]);
@@ -52,7 +49,7 @@ const MapView = ({ isDarkMode, locations, selectedLocation }) => {
         >
           <MapHandler selectedLocation={selectedLocation} />
           {locations.map((loc) => (
-            <AdvancedMarker key={loc.id} position={{ lat: loc.lat, lng: loc.lng }} onClick={() => setSelected(loc)}>
+            <AdvancedMarker key={loc.id} position={{ lat: loc.lat, lng: loc.lng }} onClick={() => onSelect(loc)}>
               <Pin
                 background={loc.status === 'active' ? '#F44336' : '#f443367c'}
                 borderColor={'white'}
@@ -61,12 +58,15 @@ const MapView = ({ isDarkMode, locations, selectedLocation }) => {
             </AdvancedMarker>
           ))}
           ;
-          {selected && (
-            <InfoWindow position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => setSelected(null)}>
+          {selectedLocation && showInfo && (
+            <InfoWindow
+              position={{ lat: selectedLocation.lat, lng: selectedLocation.lng }}
+              onCloseClick={() => onSelect(null)}
+            >
               <div className="infowindow-content">
-                <h3>{selected.name}</h3>
-                <p>{selected.address}</p>
-                {selected.status === 'inactive' && (
+                <h3>{selectedLocation.name}</h3>
+                <p>{selectedLocation.address}</p>
+                {selectedLocation.status === 'inactive' && (
                   <div className="status-badge-inactive">
                     <strong>
                       <p>⚠️ Temporalmente fuera de servicio.</p>
