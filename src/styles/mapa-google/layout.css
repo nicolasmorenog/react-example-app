@@ -165,3 +165,9 @@
   line-height: 1.3;
   text-align: left !important;
 }
+
+.active-card .status-badge-inactive {
+  background-color: #da3e33a8;
+  border: 1px solid white;    
+  color: white;              
+}
