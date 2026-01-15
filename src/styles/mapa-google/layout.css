@@ -75,6 +75,14 @@
   padding: 15px;
   border-bottom: 1px solid grey;
   text-align: left !important;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.700);
+  
+  &:hover {
+    background-color:#284158;
+    color: white;
+    border-radius: 8px;
+  }
 }
 
 .input-container {
