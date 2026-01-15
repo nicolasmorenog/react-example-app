@@ -91,6 +91,7 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
   flex-shrink: 1;
+  color: white;
 
   &:hover {
     border-color: #ffffff;
