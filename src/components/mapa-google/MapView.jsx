@@ -69,7 +69,7 @@ const MapView = ({ isDarkMode, locations, selectedLocation, onSelect }) => {
                 {selectedLocation.status === 'inactive' && (
                   <div className="status-badge-inactive">
                     <strong>
-                      <p>⚠️ Temporalmente fuera de servicio.</p>
+                      <p>⚠️ TEMPORALMENTE FUERA DE SERVICIO!</p>
                     </strong>
                   </div>
                 )}
