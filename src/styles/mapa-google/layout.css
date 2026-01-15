@@ -76,13 +76,19 @@
   border-bottom: 1px solid grey;
   text-align: left !important;
   cursor: pointer;
-  color: rgba(0, 0, 0, 0.700);
-  
+  color: rgba(0, 0, 0, 0.7);
+
   &:hover {
-    background-color:#284158;
+    background-color: #284158;
     color: white;
     border-radius: 8px;
   }
+}
+
+.active-card {
+  background-color: #284158;
+    color: white;
+  border-radius: 8px;
 }
 
 .input-container {

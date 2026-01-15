@@ -18,6 +18,7 @@ const MapaGoogle = () => {
         toggleTheme={() => setIsDarkMode(!isDarkMode)}
         onSearch={(loc) => setSelectedLocation(loc)}
         locations={locations}
+        selectedLocation={selectedLocation}
       />
     </div>
   );

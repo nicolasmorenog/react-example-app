@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const Sidebar = ({ isDarkMode, toggleTheme, onSearch, locations }) => {
+const Sidebar = ({ isDarkMode, toggleTheme, onSearch, locations, selectedLocation }) => {
   const [searchValue, setSearchValue] = useState('');
 
   // filtrado
@@ -44,7 +44,11 @@ const Sidebar = ({ isDarkMode, toggleTheme, onSearch, locations }) => {
       </div>
       <div className="sidebar-content" style={{ overflowY: 'auto' }}>
         {filteredLocations.map((loc) => (
-          <div className="location-card" key={loc.id} onClick={() => onSearch(loc)}>
+          <div
+            className={`location-card ${selectedLocation?.id === loc.id ? 'active-card' : ''}`}
+            key={loc.id}
+            onClick={() => onSearch(loc)}
+          >
             <h4>{loc.name}</h4>
             <p>{loc.address}</p>
           </div>
