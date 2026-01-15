@@ -46,7 +46,6 @@ const MapView = ({ isDarkMode, locations, selectedLocation }) => {
           defaultZoom={14}
           defaultCenter={defaultCenter}
           colorScheme={isDarkMode ? 'DARK' : 'LIGHT'}
-          gestureHandling={'greedy'}
         >
           <MapHandler selectedLocation={selectedLocation} />
           {locations.map((loc) => (
