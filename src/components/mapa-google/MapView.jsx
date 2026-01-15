@@ -28,13 +28,15 @@ const MapView = ({ isDarkMode, locations, selectedLocation }) => {
 
   const [selected, setSelected] = useState(null);
 
-  // const [openInfo, setOpenInfo] = useState(null);
-
-  // useEffect(() => {
-  //   if (selectedLocation) {
-  //     setOpenInfo(selectedLocation);
-  //   }
-  // }, [selectedLocation]);
+  // si selecciono un location card en el sidebar, se abre su info window automáticamente
+  useEffect(() => {
+    if (selectedLocation) {
+      // timeout para que no aparezca el infowindow hasta que haya hecho el zoom
+      setTimeout(() => {
+        setSelected(selectedLocation);
+      }, 600);
+    }
+  }, [selectedLocation]);
 
   return (
     <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
