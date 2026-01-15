@@ -15,6 +15,8 @@ const MapHandler = ({ selectedLocation }) => {
       }, 400);
     }
   }, [map, selectedLocation]);
+
+  return null;
 };
 
 const MapView = ({ isDarkMode, locations, selectedLocation }) => {
