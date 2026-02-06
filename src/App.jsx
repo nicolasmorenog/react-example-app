@@ -15,6 +15,7 @@ const ToDoListAPIContext = lazy(() => import('./pages/ToDoListAPIContext'));
 const Part1 = lazy(() => import('./pages/Part1'));
 const Unicafe = lazy(() => import('./pages/Unicafe'));
 const MapaGoogle = lazy(() => import('./pages/MapaGoogle'));
+const DinoGame = lazy(() => import('./pages/DinoGame'));
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
             <Route path="/counter" element={<Counter />} />
             <Route path="/unicafe" element={<Unicafe />} />
             <Route path="/mapa-google" element={<MapaGoogle />} />
+            <Route path="/dino" element={<DinoGame />} />
           </Route>
         </Routes>
       </Suspense>

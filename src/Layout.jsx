@@ -40,6 +40,9 @@ const Layout = () => {
           <Link style={padding} to="/mapa-google">
             Mapa Google
           </Link>
+          <Link style={padding} to="/dino">
+            Dino Chrome
+          </Link>
         </nav>
         <hr className="nav-hr" />
       </div>

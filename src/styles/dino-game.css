@@ -1,0 +1,22 @@
+.dino-page {
+  text-align: center;
+}
+
+.dino-page p {
+  margin-bottom: 16px;
+}
+
+.dino-canvas-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.dino-canvas-wrap canvas {
+  border: 2px solid #2b4660;
+  border-radius: 12px;
+  background: #0f1b33;
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  touch-action: manipulation;
+}
