@@ -36,8 +36,12 @@ body {
   padding: 10px; 
 }
 
-.wrapper div {
+.wrapper > :is(div, section) {
   text-align: center;
+}
+
+.wrapper > .map-container {
+  text-align: left;
 }
 
 .nav-hr {
