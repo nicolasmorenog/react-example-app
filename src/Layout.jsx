@@ -43,6 +43,9 @@ const Layout = () => {
           <Link style={padding} to="/dino">
             Dino Chrome
           </Link>
+          <Link style={padding} to="/geometry-dash">
+            Geometry Dash
+          </Link>
         </nav>
         <hr className="nav-hr" />
       </div>
