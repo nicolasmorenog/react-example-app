@@ -8,7 +8,11 @@
     "build": "vite build",
     "lint": "eslint .",
     "lint:fix": "eslint --fix --ext \".js,.ts,.vue\"",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "agent:fix": "cline 'Refactor A11y following .clinerules for file:'",
+    "agent:fix:auto": "cline --auto-approve-all 'Refactor A11y following .clinerules for file:'",
+    "agent:audit": "cline 'Analyze ALL components in src/ and propose A11y fixes following .clinerules instructions'",
+    "agent:audit:auto": "cline --auto-approve-all 'Refactor ALL components in src/ for A11y following .clinerules instructions.'"
   },
   "dependencies": {
     "@react-google-maps/api": "^2.20.8",
