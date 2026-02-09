@@ -12,7 +12,9 @@
     "agent:fix": "cline 'Refactor A11y following .clinerules for file:'",
     "agent:fix:auto": "cline --auto-approve-all 'Refactor A11y following .clinerules for file:'",
     "agent:audit": "cline 'Analyze ALL components in src/ and propose A11y fixes following .clinerules instructions'",
-    "agent:audit:auto": "cline --auto-approve-all 'Refactor ALL components in src/ for A11y following .clinerules instructions.'"
+    "agent:audit:auto": "cline --auto-approve-all 'Refactor ALL components in src/ for A11y following .clinerules instructions.'",
+    "agent:doc": "cline 'DOCUMENTATION: Sync README.md with package.json and update CHANGELOG_AI.md'",
+    "agent:doc:auto": "cline --auto-approve-all 'DOCUMENTATION: Sync README.md with package.json and update CHANGELOG_AI.md'"
   },
   "dependencies": {
     "@react-google-maps/api": "^2.20.8",

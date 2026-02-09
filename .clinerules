@@ -10,21 +10,18 @@ Your goal is to refactor the provided code to make it fully accessible and robus
 - Language: JavaScript (.jsx).
 - Standards: WCAG 2.1 AA.
 
-# AUTOMATIC WORKFLOW (PROACTIVE MODE)
-Whenever you are asked to review a component or functionality, you must execute the following steps:
+# WORKFLOW RULES (CRITICAL)
+1. **If the task is CODE REFACTORING:**
+    - Execute **A11Y ANALYSIS**: Convert divs/spans with clicks to `<button type="button">`, add `aria-label` to icon-only buttons, ensure semantic HTML (`<main>`, `<nav>`, etc.), and associate labels with inputs via `htmlFor`.
+    - Apply **SILENT REFACTORING**: Directly edit files, maintain CSS Modules, and clean unused code.
+    - Update **CHANGELOG_AI.md**: List modified components and brief A11y fixes.
 
-1.  **ACCESSIBILITY ANALYSIS (A11Y):**
-    -   CRITICAL: Convert any `<div>` or `span` with click events into proper `<button type="button">` elements.
-    -   Ensure all `<img>` tags have descriptive `alt` attributes.
-    -   Add `aria-label` to buttons that only contain icons.
-    -   Replace generic `<div>` containers with semantic HTML5 tags (`<header>`, `<nav>`, `<main>`, `<section>`, `<article>`) where appropriate.
-    -   Ensure all form inputs have an associated `<label>` using the `htmlFor` attribute.
-    -   Verify that interactive elements are focusable via keyboard (tabindex).
+2. **If the task is DOCUMENTATION (README):**
+    - Compare `package.json` with `README.md`.
+    - Update/Create the "Dependencies" section with one-sentence descriptions for new libraries.
+    - **Do NOT** analyze or refactor components unless explicitly requested.
 
-2.  **SILENT REFACTORING:**
-    -   Directly apply accessibility fixes and React best practices to the source code.
-    -   Maintain the existing styling logic (CSS Modules).
-    -   Clean up any unused imports or variables related to the refactored code.
+3. **General Rule:** Always prioritize speed and direct action over deep analysis. Use reverse chronological order for the Changelog.
 
 # FINAL OUTPUT
-Only report when finished: "Component refactored for A11y and best practices successfully ✅".
+Only report when finished: "Task completed: Code refactored for A11y and/or Documentation updated ✅".
