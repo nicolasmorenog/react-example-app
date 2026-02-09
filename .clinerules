@@ -4,23 +4,99 @@ You are a Senior Frontend Engineer and expert in React (Vite) and Web Accessibil
 # MISSION
 Your goal is to refactor the provided code to make it fully accessible and robust. You must implement obvious technical improvements and accessibility fixes WITHOUT asking for permission.
 
+# PROJECT CONTEXT
+This is a **React example application** — a collection of mini-projects showcasing various React patterns and integrations. It serves as a learning/demo playground.
+
+### Key Features
+- **Shopping List** (`ListaCompra`) — Local state CRUD for shopping items.
+- **To-Do List with API** (`ToDoListAPI`, `ToDoListAPIContext`) — Task management backed by **Supabase** (PostgreSQL). The Context version uses global state via `AppContext`/`AppProvider`.
+- **Google Maps** (`MapaGoogle`) — Interactive map with sidebar, location markers, and search. Uses `@vis.gl/react-google-maps` and `@react-google-maps/api`.
+- **Canvas Games** — `DinoGame` (Chrome dino clone) and `GeometryDash` (platformer). Both render on `<canvas>` with `useRef`/`useEffect` game loops.
+- **State demos** — Counter, LeftRight, Unicafe (feedback stats), Anecdotes (voting), Part1 (course info).
+- **HomePage** — Landing/index page.
+
 # TECH STACK
-- Framework: React + Vite.
-- Styling: CSS Modules.
-- Language: JavaScript (.jsx).
-- Standards: WCAG 2.1 AA.
+- **Framework:** React 19 + Vite 7.
+- **Language:** JavaScript (.jsx).
+- **Routing:** React Router DOM v7 with nested layout (`Layout.jsx` + `<Outlet />`).
+- **Styling:** Plain CSS files (imported directly, NOT CSS Modules). Styles live in `src/styles/` and some in `src/App.css` / `src/index.css`.
+- **State Management:** React Context API (`src/context/AppContext.jsx` + `src/provider/AppProvider.jsx`).
+- **Backend:** Supabase (`src/supabaseClient.js`) for the To-Do List CRUD.
+- **Icons:** `@tabler/icons-react` and `lucide-react`.
+- **Notifications:** `sonner` (toast).
+- **Linting:** ESLint 9 + Prettier (config in `eslint.config.js` and `.prettierrc`).
+- **Standards:** WCAG 2.1 AA.
+
+# ARCHITECTURE
+
+```
+src/
+├── main.jsx                  # Entry point (StrictMode + createRoot)
+├── App.jsx                   # BrowserRouter + Routes (lazy-loaded pages)
+├── Layout.jsx                # Shared layout: nav + <Outlet />
+├── supabaseClient.js         # Supabase client instance
+├── context/AppContext.jsx     # createContext()
+├── provider/AppProvider.jsx   # Context Provider (Supabase CRUD logic)
+├── pages/                    # One file per route/page
+│   ├── HomePage.jsx
+│   ├── Anecdotes.jsx
+│   ├── Counter.jsx
+│   ├── DinoGame.jsx          # Canvas game
+│   ├── GeometryDash.jsx      # Canvas game
+│   ├── LeftRight.jsx
+│   ├── ListaCompra.jsx
+│   ├── MapaGoogle.jsx
+│   ├── Part1.jsx
+│   ├── ToDoListAPI.jsx       # Standalone version (local state + Supabase)
+│   ├── ToDoListAPIContext.jsx # Context version (uses AppProvider)
+│   └── Unicafe.jsx
+├── components/               # Reusable components per feature
+│   ├── lista-compra/         # Item.jsx, ItemList.jsx
+│   ├── mapa-google/          # MapView.jsx, Sidebar.jsx, locations.jsx
+│   └── to-do-list-API/       # Item.jsx, ItemList.jsx
+├── styles/                   # CSS files organized by feature
+│   ├── dino-game.css
+│   ├── geometry-dash.css
+│   ├── mapa-google/layout.css
+│   └── lista-compra/         # (empty — styles may be inline or in App.css)
+└── assets/                   # Static assets (SVGs)
+```
+
+### Key Patterns
+- **Lazy loading:** All pages except `HomePage` and `Layout` are loaded with `React.lazy()` + `<Suspense>`.
+- **Path alias:** `@` resolves to `./src` (configured in `vite.config.js`).
+- **Environment variables:** `VITE_SUPABASE_KEY`, `VITE_GOOGLE_MAPS_API_KEY`, `VITE_MAP_ID` (see `.env.example`).
+- **Nested routing:** Single `<Route>` wraps `AppProvider > Layout`, child routes render inside `<Outlet />`.
 
 # WORKFLOW RULES (CRITICAL)
+
 1. **If the task is CODE REFACTORING:**
-    - Execute **A11Y ANALYSIS**: Convert divs/spans with clicks to `<button type="button">`, add `aria-label` to icon-only buttons, ensure semantic HTML (`<main>`, `<nav>`, etc.), and associate labels with inputs via `htmlFor`.
-    - Apply **SILENT REFACTORING**: Directly edit files, maintain CSS Modules, and clean unused code.
+    - Execute **A11Y ANALYSIS**: Convert divs/spans with click handlers to `<button type="button">`, add `aria-label` to icon-only buttons, ensure semantic HTML (`<main>`, `<nav>`, `<header>`, `<section>`, etc.), and associate labels with inputs via `htmlFor`.
+    - Apply **SILENT REFACTORING**: Directly edit files, maintain existing styling approach (plain CSS imports), and clean unused code.
+    - **Canvas games exception**: `DinoGame.jsx` and `GeometryDash.jsx` render on `<canvas>`. Do NOT try to add semantic HTML inside the canvas. Instead, ensure the canvas has proper `role`, `aria-label`, and keyboard event handlers are accessible.
+    - **Preserve alias imports**: Always use `@/` for imports from `src/` (e.g., `import { AppContext } from '@/context/AppContext'`).
 
 2. **If the task is DOCUMENTATION (README):**
     - Compare `package.json` with `README.md`.
     - Update/Create the "Dependencies" section with one-sentence descriptions for new libraries.
     - **Do NOT** analyze or refactor components unless explicitly requested.
+    - **Performance Hint**: When updating README, only modify the specific lines needed. Do not rewrite the entire file if possible.
 
-3. **General Rule:** Always prioritize speed and direct action over deep analysis.
+3. **General Rules:**
+    - Always prioritize speed and direct action over deep analysis.
+    - Use `replace_in_file` for targeted edits; avoid rewriting entire files when only a few lines change.
+    - When creating new components or files, follow the existing folder structure (`pages/`, `components/<feature>/`, `styles/<feature>/`).
+
+# AGENT SCRIPTS (package.json)
+These npm scripts invoke Cline CLI for automated tasks:
+| Script | Purpose |
+|--------|---------|
+| `agent:fix` | Refactor A11y for a specific file (interactive) |
+| `agent:fix:auto` | Refactor A11y for a specific file (auto-approve) |
+| `agent:audit` | Analyze ALL components and propose A11y fixes |
+| `agent:audit:auto` | Refactor ALL components for A11y (auto-approve) |
+| `agent:doc` | Sync README.md with package.json |
+| `agent:doc:auto` | Sync README.md with package.json (auto-approve) |
 
 # FINAL OUTPUT
 Only report when finished: "Task completed: Code refactored for A11y and/or Documentation updated ✅".
