@@ -1,0 +1,155 @@
+.geometry-dash-page {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.geometry-dash-page h2 {
+  color: #00ffff;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.geometry-dash-page > p {
+  text-align: center;
+  color: #aaa;
+  margin-bottom: 20px;
+}
+
+.gd-controls {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: linear-gradient(135deg, #1a1a3a 0%, #0a0a1a 100%);
+  border-radius: 10px;
+  border: 1px solid #333;
+}
+
+.gd-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ddd;
+  font-size: 0.9rem;
+}
+
+.gd-control kbd {
+  background: linear-gradient(145deg, #333, #222);
+  border: 1px solid #555;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: #00ffff;
+  box-shadow: 0 2px 0 #111;
+}
+
+.gd-canvas-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.gd-canvas-wrap canvas {
+  border: 3px solid #00ffff;
+  border-radius: 8px;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.3), inset 0 0 30px rgba(0, 255, 255, 0.1);
+  background: #0a0a1a;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.gd-canvas-wrap canvas:hover {
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.5), inset 0 0 40px rgba(0, 255, 255, 0.15);
+}
+
+.gd-info {
+  background: linear-gradient(135deg, #1a1a3a 0%, #0a0a1a 100%);
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid #333;
+}
+
+.gd-info p {
+  margin: 10px 0;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+.gd-info strong {
+  color: #00ffff;
+}
+
+.gd-info p:nth-child(2) strong {
+  color: #ff6b35;
+}
+
+.gd-info p:nth-child(3) strong {
+  color: #00ff00;
+}
+
+/* Responsive */
+@media (max-width: 850px) {
+  .gd-canvas-wrap canvas {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+  }
+
+  .gd-controls {
+    gap: 10px;
+  }
+
+  .gd-control {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .geometry-dash-page {
+    padding: 10px;
+  }
+
+  .geometry-dash-page h2 {
+    font-size: 1.5rem;
+  }
+
+  .gd-controls {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .gd-control {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .gd-info {
+    padding: 15px;
+  }
+
+  .gd-info p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Animations */
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+  }
+}
+
+.gd-canvas-wrap canvas:active {
+  animation: glow 0.5s ease-in-out;
+}
