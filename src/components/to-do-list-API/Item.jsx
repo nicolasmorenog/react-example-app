@@ -89,7 +89,17 @@ function Item({
   if (!item) {
     return (
       <div className="input-content">
-        <input type="text" placeholder="Add a new item" onChange={onChange} value={newItem} onKeyDown={handleKeyDown} />
+        <label htmlFor="new-item-input-api" className="visually-hidden">
+          Add a new item
+        </label>
+        <input
+          id="new-item-input-api"
+          type="text"
+          placeholder="Add a new item"
+          onChange={onChange}
+          value={newItem}
+          onKeyDown={handleKeyDown}
+        />
         <button className="add-button" onClick={onClick}>
           + Add
         </button>
@@ -124,13 +134,17 @@ function Item({
         </div>
 
         <div className="item-buttons-group">
-          <button className="item-button" onClick={handleShowDetails}>
+          <button
+            className="item-button"
+            onClick={handleShowDetails}
+            aria-label={selectedItemId === item.id ? 'Hide details' : 'Show details'}
+          >
             {selectedItemId === item.id ? <IconEyeClosed stroke={2} /> : <IconEye stroke={2} />}
           </button>
-          <button className="item-button" onClick={handleShowEdit}>
+          <button className="item-button" onClick={handleShowEdit} aria-label="Edit item">
             <IconPencil stroke={2} />
           </button>
-          <button className="item-button" onClick={() => handleDelete(item.id)}>
+          <button className="item-button" onClick={() => handleDelete(item.id)} aria-label="Delete item">
             <IconTrash color="#cc3b3b" stroke={2} />
           </button>
         </div>
@@ -138,12 +152,12 @@ function Item({
 
       {/* Detalles del item */}
       {selectedItemId === item.id && (
-        <div className="item-details">
+        <section className="item-details" aria-label={`Details for ${item.name}`}>
           <hr />
           {item.createdAt && <p>Created: {new Date(item.createdAt).toLocaleString()}</p>}
           {item.updatedAt && <p>Updated: {new Date(item.updatedAt).toLocaleString()}</p>}
           <p>Status: {item.completedAt === null ? 'Pending' : 'Completed'}</p>
-        </div>
+        </section>
       )}
     </div>
   );

@@ -21,6 +21,13 @@ const Stats = (props) => {
       <>
         <h1>Statistics</h1>
         <table>
+          <caption>Feedback statistics summary</caption>
+          <thead>
+            <tr>
+              <th scope="col">Metric</th>
+              <th scope="col">Value</th>
+            </tr>
+          </thead>
           <tbody>
             <tr>
               <StatLine text="Good: " stat={props.good} />
@@ -32,15 +39,15 @@ const Stats = (props) => {
               <StatLine text="Bad: " stat={props.bad} />
             </tr>
             <tr>
-              <td>Total: </td>
+              <th scope="row">Total: </th>
               <td>{total}</td>
             </tr>
             <tr>
-              <td>Average: </td>
+              <th scope="row">Average: </th>
               <td>{average}</td>
             </tr>
             <tr>
-              <td>Positive: </td>
+              <th scope="row">Positive: </th>
               <td>{positive}%</td>
             </tr>
           </tbody>
@@ -53,7 +60,7 @@ const Stats = (props) => {
 const StatLine = (props) => {
   return (
     <>
-      <td>{props.text}</td>
+      <th scope="row">{props.text}</th>
       <td>{props.stat}</td>
     </>
   );

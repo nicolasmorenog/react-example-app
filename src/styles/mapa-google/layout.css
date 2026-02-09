@@ -77,11 +77,23 @@
   text-align: left !important;
   cursor: pointer;
   color: rgba(0, 0, 0, 0.7);
+  /* Reset button styles to match original div appearance */
+  background: none;
+  border: none;
+  border-bottom: 1px solid grey;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
 
   &:hover {
     background-color: #284158;
     color: white;
     border-radius: 8px;
+  }
+
+  &:focus {
+    outline: 2px solid #3b92cc;
+    outline-offset: -2px;
   }
 }
 
