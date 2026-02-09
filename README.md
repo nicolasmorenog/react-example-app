@@ -55,7 +55,7 @@ A React + Vite example application showcasing various React patterns and integra
 
 - **Framework:** React 19 + Vite 7
 - **Routing:** React Router DOM 7
-- **Styling:** CSS Modules
+- **Styling:** Plain CSS files
 - **Backend:** Supabase
 - **Maps:** Google Maps API
 - **Linting:** ESLint + Prettier
