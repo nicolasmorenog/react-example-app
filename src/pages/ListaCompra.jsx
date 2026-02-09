@@ -138,7 +138,7 @@ function ListaCompra({ isEditing = false }) {
             Completed ({completedItemsCount})
           </button>
         </div>
-        <button className="reset-button" onClick={handleReset}>
+        <button className="reset-button" onClick={handleReset} aria-label="Reset all items">
           <IconReload stroke={2} />
           Reset
         </button>

@@ -118,13 +118,13 @@ function ToDoListAPI({ isEditing = false }) {
             Completed ({completedItemsCount})
           </button>
         </div>
-        <button className="reset-button" onClick={handleReset}>
+        <button className="reset-button" onClick={handleReset} aria-label="Reset all items">
           <IconReload stroke={2} />
           Reset
         </button>
       </div>
       <div className="sort-container">
-        <label>Order by: </label>
+        <label htmlFor="sort-select">Order by: </label>
         <select id="sort-select" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
           <option value="createdAt-asc">First Created</option>
           <option value="createdAt-desc">Last Created</option>
@@ -145,8 +145,13 @@ function ToDoListAPI({ isEditing = false }) {
         />
         <div className="pagination-controls">
           <div className="rows-per-page-selector">
-            <span>Rows per page: </span>
-            <select className="rows-per-page-dropdown" value={rowsPerPage} onChange={handleRowsPerPageChange}>
+            <label htmlFor="rows-per-page">Rows per page: </label>
+            <select
+              id="rows-per-page"
+              className="rows-per-page-dropdown"
+              value={rowsPerPage}
+              onChange={handleRowsPerPageChange}
+            >
               <option value={6}>6</option>
               <option value={10}>10</option>
               <option value={20}>20</option>

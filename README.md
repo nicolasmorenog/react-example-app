@@ -1,16 +1,72 @@
-# React + Vite
+# React Example App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + Vite example application showcasing various React patterns and integrations including shopping lists, Google Maps, to-do lists with API integration, and state management examples.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Shopping List** - Manage shopping items with add/remove functionality
+- **Google Maps Integration** - Interactive map with location markers using Google Maps API
+- **To-Do List with API** - Task management with Supabase backend integration
+- **State Management Examples** - Counter, Unicafe feedback, and anecdote voting demos
+- **Context API Demo** - Global state management using React Context
 
-## React Compiler
+## Scripts
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Script | Description |
+|--------|-------------|
+| `npm run dev` | Start development server with Vite |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview production build locally |
+| `npm run lint` | Run ESLint for code quality |
+| `npm run lint:fix` | Auto-fix ESLint issues |
 
-## Expanding the ESLint configuration
+## Dependencies
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Package | Description |
+|---------|-------------|
+| [@react-google-maps/api](https://www.npmjs.com/package/@react-google-maps/api) | React components for integrating Google Maps JavaScript API. |
+| [@supabase/supabase-js](https://www.npmjs.com/package/@supabase/supabase-js) | JavaScript client for Supabase (PostgreSQL database and authentication). |
+| [@tabler/icons-react](https://www.npmjs.com/package/@tabler/icons-react) | React component library for Tabler Icons (modern, customizable SVG icons). |
+| [@vis.gl/react-google-maps](https://www.npmjs.com/package/@vis.gl/react-google-maps) | Alternative React library for Google Maps integration with vis.gl ecosystem. |
+| [dotenv](https://www.npmjs.com/package/dotenv) | Loads environment variables from `.env` file into `process.env`. |
+| [react](https://www.npmjs.com/package/react) | Core React library for building user interfaces with components. |
+| [react-dom](https://www.npmjs.com/package/react-dom) | React package for DOM-specific methods to render components in the browser. |
+| [react-router-dom](https://www.npmjs.com/package/react-router-dom) | Declarative routing library for React single-page applications. |
+| [sonner](https://www.npmjs.com/package/sonner) | Opinionated toast notification component for React applications. |
+
+## DevDependencies
+
+| Package | Description |
+|---------|-------------|
+| [@eslint/js](https://www.npmjs.com/package/@eslint/js) | ESLint's JavaScript configuration and utilities. |
+| [@types/react](https://www.npmjs.com/package/@types/react) | TypeScript type definitions for React. |
+| [@types/react-dom](https://www.npmjs.com/package/@types/react-dom) | TypeScript type definitions for React DOM. |
+| [@vitejs/plugin-react](https://www.npmjs.com/package/@vitejs/plugin-react) | Official Vite plugin for React with Fast Refresh support. |
+| [eslint](https://www.npmjs.com/package/eslint) | Pluggable JavaScript linter for identifying code issues. |
+| [eslint-config-prettier](https://www.npmjs.com/package/eslint-config-prettier) | Disables ESLint rules that conflict with Prettier formatting. |
+| [eslint-plugin-prettier](https://www.npmjs.com/package/eslint-plugin-prettier) | Runs Prettier as an ESLint rule for consistent formatting. |
+| [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks) | ESLint rules for enforcing React Hooks best practices. |
+| [eslint-plugin-react-refresh](https://www.npmjs.com/package/eslint-plugin-react-refresh) | ESLint plugin for React Fast Refresh validation. |
+| [globals](https://www.npmjs.com/package/globals) | Global identifiers for JavaScript environments (Node.js, browser, etc.). |
+| [prettier](https://www.npmjs.com/package/prettier) | Opinionated code formatter for consistent style. |
+| [vite](https://www.npmjs.com/package/vite) | Next-generation frontend build tool with fast HMR. |
+
+## Tech Stack
+
+- **Framework:** React 19 + Vite 7
+- **Routing:** React Router DOM 7
+- **Styling:** CSS Modules
+- **Backend:** Supabase
+- **Maps:** Google Maps API
+- **Linting:** ESLint + Prettier
+
+## Getting Started
+
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Copy `.env.example` to `.env` and fill in your API keys
+4. Start development server: `npm run dev`
+
+## License
+
+MIT
