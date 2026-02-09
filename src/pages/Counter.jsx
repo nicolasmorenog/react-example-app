@@ -2,7 +2,11 @@ import { useState } from 'react';
 
 const Display = ({ counter }) => <div>{counter}</div>;
 
-const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>;
+const Button = ({ onClick, text, ariaLabel }) => (
+  <button onClick={onClick} aria-label={ariaLabel}>
+    {text}
+  </button>
+);
 
 const Counter = () => {
   const [counter, setCounter] = useState(0);
@@ -15,9 +19,9 @@ const Counter = () => {
   return (
     <div>
       <Display counter={counter} />
-      <Button onClick={decreaseByOne} text={'-'} />
-      <Button onClick={setToZero} text={'Reset'} />
-      <Button onClick={increaseByOne} text={'+'} />
+      <Button onClick={decreaseByOne} text={'-'} ariaLabel="Decrease by one" />
+      <Button onClick={setToZero} text={'Reset'} ariaLabel="Reset counter" />
+      <Button onClick={increaseByOne} text={'+'} ariaLabel="Increase by one" />
     </div>
   );
 };

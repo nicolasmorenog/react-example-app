@@ -28,6 +28,9 @@ const Sidebar = ({ isDarkMode, toggleTheme, onSearch, locations, selectedLocatio
         </div>
       </div>
       <div className="input-container">
+        <label htmlFor="search-input" className="visually-hidden">
+          Buscar por nombre o ID
+        </label>
         <input
           id="search-input"
           autoComplete="off"
@@ -37,17 +40,23 @@ const Sidebar = ({ isDarkMode, toggleTheme, onSearch, locations, selectedLocatio
           placeholder="Buscar por nombre o ID..."
           value={searchValue}
           onChange={handleInputChange}
+          aria-describedby="search-help"
         />
+        <span id="search-help" className="visually-hidden">
+          Escribe el nombre o ID de la ubicación para filtrar los resultados
+        </span>
       </div>
       <div className="sidebar-static-title">
         <h2>Resultados:</h2>
       </div>
       <div className="sidebar-content" style={{ overflowY: 'auto' }}>
         {filteredLocations.map((loc) => (
-          <div
+          <button
+            type="button"
             className={`location-card ${selectedLocation?.id === loc.id ? 'active-card' : ''}`}
             key={loc.id}
             onClick={() => onSearch(loc)}
+            aria-label={`Ver ubicación ${loc.name}${loc.status === 'inactive' ? ' - Fuera de servicio' : ''}`}
           >
             <h4>{loc.name}</h4>
             <p>{loc.address}</p>
@@ -58,7 +67,7 @@ const Sidebar = ({ isDarkMode, toggleTheme, onSearch, locations, selectedLocatio
                 </strong>
               </div>
             )}
-          </div>
+          </button>
         ))}
       </div>
     </div>
