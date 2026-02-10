@@ -7,6 +7,7 @@ A React + Vite example application showcasing various React patterns and integra
 - **Shopping List** - Manage shopping items with add/remove functionality
 - **Google Maps Integration** - Interactive map with location markers using Google Maps API
 - **To-Do List with API** - Task management with Supabase backend integration
+- **Canvas Games** - Dino Game (Chrome dino clone) and Geometry Dash platformer
 - **State Management Examples** - Counter, Unicafe feedback, and anecdote voting demos
 - **Context API Demo** - Global state management using React Context
 
