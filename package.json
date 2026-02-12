@@ -4,18 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "add": "f() { npm install \"$1\" && npm run agent:doc:auto; }; f",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "lint:fix": "eslint --fix --ext \".js,.ts,.vue\"",
-    "preview": "vite preview",
-    "agent:fix": "cline 'Refactor A11y following .clinerules for file:'",
-    "agent:fix:auto": "cline -y 'Refactor A11y following .clinerules for file:'",
-    "agent:audit": "cline 'Analyze ALL components in src/ and propose A11y fixes following .clinerules instructions'",
-    "agent:audit:auto": "cline -y 'Refactor ALL components in src/ for A11y following .clinerules instructions.'",
-    "agent:doc": "cline 'DOCUMENTATION: Sync README.md with package.json'",
-    "agent:doc:auto": "cline -y 'DOCUMENTATION: Sync README.md with package.json'"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@react-google-maps/api": "^2.20.8",
