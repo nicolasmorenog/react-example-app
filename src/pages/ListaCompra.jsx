@@ -110,51 +110,75 @@ function ListaCompra({ isEditing = false }) {
   const completedItemsCount = allItemsCount - pendingItemsCount;
 
   return (
-    <div className="main-container">
+    <main className="main-container">
       <h2>Shopping List</h2>
-      <div className="item">
-        <div>
-          <Item setLista={setLista} />
+      <section aria-labelledby="add-item-section">
+        <h3 id="add-item-section" className="visually-hidden">
+          Add new item
+        </h3>
+        <div className="item">
+          <div>
+            <Item setLista={setLista} />
+          </div>
         </div>
-      </div>
-      <div className="filter-container">
-        <div className="filter-group">
-          <button
-            className={`filter-button${filtro === 'all' ? '' : 'active-button'}`}
-            onClick={() => setFiltro('all')}
-          >
-            All ({allItemsCount})
-          </button>
-          <button
-            className={`filter-button${filtro === 'pending' ? '' : 'active-button'}`}
-            onClick={() => setFiltro('pending')}
-          >
-            Pending ({pendingItemsCount})
-          </button>
-          <button
-            className={`filter-button${filtro === 'completed' ? '' : 'active-button'}`}
-            onClick={() => setFiltro('completed')}
-          >
-            Completed ({completedItemsCount})
+      </section>
+      <section aria-labelledby="filter-section">
+        <h3 id="filter-section" className="visually-hidden">
+          Filter and actions
+        </h3>
+        <div className="filter-container">
+          <div className="filter-group" role="group" aria-label="Filter shopping items">
+            <button
+              type="button"
+              className={`filter-button${filtro === 'all' ? '' : 'active-button'}`}
+              onClick={() => setFiltro('all')}
+              aria-pressed={filtro === 'all'}
+              aria-label={`Show all items (${allItemsCount})`}
+            >
+              All ({allItemsCount})
+            </button>
+            <button
+              type="button"
+              className={`filter-button${filtro === 'pending' ? '' : 'active-button'}`}
+              onClick={() => setFiltro('pending')}
+              aria-pressed={filtro === 'pending'}
+              aria-label={`Show pending items (${pendingItemsCount})`}
+            >
+              Pending ({pendingItemsCount})
+            </button>
+            <button
+              type="button"
+              className={`filter-button${filtro === 'completed' ? '' : 'active-button'}`}
+              onClick={() => setFiltro('completed')}
+              aria-pressed={filtro === 'completed'}
+              aria-label={`Show completed items (${completedItemsCount})`}
+            >
+              Completed ({completedItemsCount})
+            </button>
+          </div>
+          <button type="button" className="reset-button" onClick={handleReset} aria-label="Reset all items">
+            <IconReload stroke={2} aria-hidden="true" />
+            Reset
           </button>
         </div>
-        <button className="reset-button" onClick={handleReset} aria-label="Reset all items">
-          <IconReload stroke={2} />
-          Reset
-        </button>
-      </div>
-      <div className="item-list">
-        <ItemList
-          lista={filteredList}
-          handleToggle={handleToggle}
-          handleEdit={handleEdit}
-          handleDelete={handleDelete}
-          selectedItemId={selectedItemId}
-          setSelectedItemId={setSelectedItemId}
-          isEditing={isEditing}
-        />
-      </div>
-    </div>
+      </section>
+      <section aria-labelledby="items-list-section">
+        <h3 id="items-list-section" className="visually-hidden">
+          Shopping items
+        </h3>
+        <div className="item-list" aria-live="polite" aria-atomic="false">
+          <ItemList
+            lista={filteredList}
+            handleToggle={handleToggle}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+            selectedItemId={selectedItemId}
+            setSelectedItemId={setSelectedItemId}
+            isEditing={isEditing}
+          />
+        </div>
+      </section>
+    </main>
   );
 }
 

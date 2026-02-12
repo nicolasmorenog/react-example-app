@@ -119,8 +119,9 @@ function Item({
           onChange={onChange}
           value={newItem}
           onKeyDown={handleKeyDown}
+          aria-required="false"
         />
-        <button className="add-button" onClick={onClick}>
+        <button type="button" className="add-button" onClick={onClick} aria-label="Add new item to list">
           + Add
         </button>
       </div>
@@ -131,52 +132,91 @@ function Item({
   return (
     <div className="item">
       <article>
-        <input type="checkbox" onChange={() => handleToggle(item.id)} checked={item.completedAt !== null} />
+        <input
+          type="checkbox"
+          onChange={() => handleToggle(item.id)}
+          checked={item.completedAt !== null}
+          id={`item-checkbox-${item.id}`}
+          aria-label={`Mark "${item.name}" as ${item.completedAt !== null ? 'pending' : 'completed'}`}
+        />
 
         <div className="item-content">
           {isEditingThisItem ? (
             <div className="item-input-container">
+              <label htmlFor={`edit-item-${item.id}`} className="visually-hidden">
+                Edit item name
+              </label>
               <input
+                id={`edit-item-${item.id}`}
                 type="text"
                 placeholder={item.name}
                 onChange={onChange}
                 value={newItem}
                 onKeyDown={handleEditKeyDown}
-                autoFocus // Un detalle UX extra: enfocar al editar
+                autoFocus
+                aria-label={`Edit item name: ${item.name}`}
               />
-              <button className="add-button" onClick={onClickSave}>
+              <button type="button" className="add-button" onClick={onClickSave} aria-label="Save edited item">
                 Save
               </button>
             </div>
           ) : (
-            <label className="item-label"> {item.name}</label>
+            <label htmlFor={`item-checkbox-${item.id}`} className="item-label">
+              {item.name}
+            </label>
           )}
         </div>
 
-        <div className="item-buttons-group">
+        <div className="item-buttons-group" role="group" aria-label={`Actions for ${item.name}`}>
           <button
+            type="button"
             className="item-button"
             onClick={handleShowDetails}
-            aria-label={selectedItemId === item.id ? 'Hide details' : 'Show details'}
+            aria-label={selectedItemId === item.id ? `Hide details for ${item.name}` : `Show details for ${item.name}`}
+            aria-expanded={selectedItemId === item.id}
           >
-            {selectedItemId === item.id ? <IconEyeClosed stroke={2} /> : <IconEye stroke={2} />}
+            {selectedItemId === item.id ? (
+              <IconEyeClosed stroke={2} aria-hidden="true" />
+            ) : (
+              <IconEye stroke={2} aria-hidden="true" />
+            )}
           </button>
-          <button className="item-button" onClick={handleShowEdit} aria-label="Edit item">
-            <IconPencil stroke={2} />
+          <button
+            type="button"
+            className="item-button"
+            onClick={handleShowEdit}
+            aria-label={`Edit ${item.name}`}
+          >
+            <IconPencil stroke={2} aria-hidden="true" />
           </button>
-          <button className="item-button" onClick={() => handleDelete(item.id)} aria-label="Delete item">
-            <IconTrash color="#cc3b3b" stroke={2} />
+          <button
+            type="button"
+            className="item-button"
+            onClick={() => handleDelete(item.id)}
+            aria-label={`Delete ${item.name}`}
+          >
+            <IconTrash color="#cc3b3b" stroke={2} aria-hidden="true" />
           </button>
         </div>
       </article>
 
       {/* Detalles del item */}
       {selectedItemId === item.id && (
-        <section className="item-details" aria-label={`Details for ${item.name}`}>
-          <hr />
-          {item.createdAt && <p>Created: {new Date(item.createdAt).toLocaleString()}</p>}
-          {item.updatedAt && <p>Updated: {new Date(item.updatedAt).toLocaleString()}</p>}
-          <p>Status: {item.completedAt === null ? 'Pending' : 'Completed'}</p>
+        <section className="item-details" aria-label={`Details for ${item.name}`} role="region">
+          <hr aria-hidden="true" />
+          {item.createdAt && (
+            <p>
+              <strong>Created:</strong> {new Date(item.createdAt).toLocaleString()}
+            </p>
+          )}
+          {item.updatedAt && (
+            <p>
+              <strong>Updated:</strong> {new Date(item.updatedAt).toLocaleString()}
+            </p>
+          )}
+          <p>
+            <strong>Status:</strong> {item.completedAt === null ? 'Pending' : 'Completed'}
+          </p>
         </section>
       )}
     </div>

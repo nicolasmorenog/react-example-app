@@ -1,12 +1,19 @@
 import Item from './Item';
 
 function ItemList({ lista, handleToggle, handleEdit, handleDelete, selectedItemId, setSelectedItemId, isEditing }) {
+  if (lista.length === 0) {
+    return (
+      <p role="status" aria-live="polite">
+        No items to display. Add your first item above.
+      </p>
+    );
+  }
+
   return (
-    <>
-      <ul>
-        {lista.map((item) => (
+    <ul aria-label="Shopping items list">
+      {lista.map((item) => (
+        <li key={item.id}>
           <Item
-            key={item.id}
             item={item}
             handleToggle={handleToggle}
             handleEdit={handleEdit}
@@ -15,9 +22,9 @@ function ItemList({ lista, handleToggle, handleEdit, handleDelete, selectedItemI
             setSelectedItemId={setSelectedItemId}
             isEditing={isEditing}
           />
-        ))}
-      </ul>
-    </>
+        </li>
+      ))}
+    </ul>
   );
 }
 
