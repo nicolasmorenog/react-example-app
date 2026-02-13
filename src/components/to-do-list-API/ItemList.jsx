@@ -1,22 +1,30 @@
 import Item from './Item';
 
-function ItemList({ lista, handleToggle, handleEdit, selectedItemId, setSelectedItemId, isEditing }) {
+function ItemList({ lista, handleToggle, handleEdit, handleDelete, selectedItemId, setSelectedItemId, isEditing }) {
+  if (lista.length === 0) {
+    return (
+      <p role="status" aria-live="polite">
+        No tasks to display. Add your first task above.
+      </p>
+    );
+  }
+
   return (
-    <>
-      <ul>
-        {lista.map((item) => (
+    <ul aria-label="Tasks list">
+      {lista.map((item) => (
+        <li key={item.id}>
           <Item
-            key={item.id}
             item={item}
             handleToggle={handleToggle}
             handleEdit={handleEdit}
+            handleDelete={handleDelete}
             selectedItemId={selectedItemId}
             setSelectedItemId={setSelectedItemId}
             isEditing={isEditing}
           />
-        ))}
-      </ul>
-    </>
+        </li>
+      ))}
+    </ul>
   );
 }
 
