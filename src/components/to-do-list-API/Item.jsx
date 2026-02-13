@@ -1,27 +1,25 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { IconTrash, IconPencil, IconEye, IconEyeClosed } from '@tabler/icons-react';
-import { useContext } from 'react';
-import { AppContext } from '@/context/AppContext';
 
 function Item({
-  item, //Undefined --> MODO CREAR | Objeto --> MODO LISTA
+  handleAddItem, // Required for creation mode
+  item, // Undefined --> MODO CREAR | Objeto --> MODO LISTA
   handleToggle,
   handleEdit,
+  handleDelete,
   selectedItemId,
   setSelectedItemId,
   isEditing,
 }) {
-  const { handleAddItem, handleDelete } = useContext(AppContext);
-
-  // Hooks.
+  // Hooks
   const navigate = useNavigate();
   const { id: itemIdFromURL } = useParams();
 
-  // Estado del input.
+  // Estado del input
   const [newItem, setNewItem] = useState(item ? item.name : '');
 
-  // Comprobar si el item está en modo edición.
+  // Comprobar si el item está en modo edición
   const isEditingThisItem = isEditing && item && item.id === itemIdFromURL;
 
   useEffect(() => {
@@ -32,16 +30,18 @@ function Item({
     }
   }, [itemIdFromURL, isEditingThisItem, item, setSelectedItemId]);
 
-  // Handlers.
+  // Handlers
   const onChange = (e) => {
     setNewItem(e.target.value);
   };
 
   const onClick = () => {
-    // Modo creación: llama a handleAddItem y limpia el input.
-    if (!newItem.trim()) return;
-    handleAddItem(newItem);
-    setNewItem('');
+    if (!item) {
+      // Modo creación
+      if (!newItem.trim()) return;
+      handleAddItem(newItem);
+      setNewItem('');
+    }
   };
 
   const handleKeyDown = (event) => {
@@ -50,20 +50,18 @@ function Item({
     }
   };
 
-  // Visualización.
+  // Visualización
   const handleShowDetails = () => {
     if (selectedItemId === item.id) {
-      // Si está abierto se cierra.
       setSelectedItemId(null);
       navigate('/to-do-list-API');
     } else {
-      // Si está cerrado se abre.
       setSelectedItemId(item.id);
       navigate(`/to-do-list-API/${item.id}`);
     }
   };
 
-  // Edición.
+  // Edición
   const handleShowEdit = () => {
     if (isEditingThisItem) {
       navigate(`/to-do-list-API`);
@@ -85,12 +83,12 @@ function Item({
     navigate('/to-do-list-API');
   };
 
-  // UI - Modo Creación.
+  // UI - Modo Creación
   if (!item) {
     return (
       <div className="input-content">
         <label htmlFor="new-item-input-api" className="visually-hidden">
-          Add a new item
+          Add a new task
         </label>
         <input
           id="new-item-input-api"
@@ -99,64 +97,104 @@ function Item({
           onChange={onChange}
           value={newItem}
           onKeyDown={handleKeyDown}
+          aria-required="false"
         />
-        <button className="add-button" onClick={onClick}>
+        <button type="button" className="add-button" onClick={onClick} aria-label="Add new task to list">
           + Add
         </button>
       </div>
     );
   }
 
-  // UI - Modo Lista.
+  // UI - Modo Lista
   return (
     <div className="item">
       <article>
-        <input type="checkbox" onChange={() => handleToggle(item.id)} checked={item.completedAt !== null} />
+        <input
+          type="checkbox"
+          onChange={() => handleToggle(item.id)}
+          checked={item.completedAt !== null}
+          id={`item-checkbox-api-${item.id}`}
+          aria-label={`Mark "${item.name}" as ${item.completedAt !== null ? 'pending' : 'completed'}`}
+        />
 
         <div className="item-content">
           {isEditingThisItem ? (
             <div className="item-input-container">
+              <label htmlFor={`edit-item-api-${item.id}`} className="visually-hidden">
+                Edit task name
+              </label>
               <input
+                id={`edit-item-api-${item.id}`}
                 type="text"
                 placeholder={item.name}
                 onChange={onChange}
                 value={newItem}
                 onKeyDown={handleEditKeyDown}
                 autoFocus
+                aria-label={`Edit task name: ${item.name}`}
               />
-              <button className="add-button" onClick={onClickSave}>
+              <button type="button" className="add-button" onClick={onClickSave} aria-label="Save edited task">
                 Save
               </button>
             </div>
           ) : (
-            <label className="item-label"> {item.name}</label>
+            <label htmlFor={`item-checkbox-api-${item.id}`} className="item-label">
+              {item.name}
+            </label>
           )}
         </div>
 
-        <div className="item-buttons-group">
+        <div className="item-buttons-group" role="group" aria-label={`Actions for ${item.name}`}>
           <button
+            type="button"
             className="item-button"
             onClick={handleShowDetails}
-            aria-label={selectedItemId === item.id ? 'Hide details' : 'Show details'}
+            aria-label={selectedItemId === item.id ? `Hide details for ${item.name}` : `Show details for ${item.name}`}
+            aria-expanded={selectedItemId === item.id}
           >
-            {selectedItemId === item.id ? <IconEyeClosed stroke={2} /> : <IconEye stroke={2} />}
+            {selectedItemId === item.id ? (
+              <IconEyeClosed stroke={2} aria-hidden="true" />
+            ) : (
+              <IconEye stroke={2} aria-hidden="true" />
+            )}
           </button>
-          <button className="item-button" onClick={handleShowEdit} aria-label="Edit item">
-            <IconPencil stroke={2} />
+          <button
+            type="button"
+            className="item-button"
+            onClick={handleShowEdit}
+            aria-label={`Edit ${item.name}`}
+          >
+            <IconPencil stroke={2} aria-hidden="true" />
           </button>
-          <button className="item-button" onClick={() => handleDelete(item.id)} aria-label="Delete item">
-            <IconTrash color="#cc3b3b" stroke={2} />
+          <button
+            type="button"
+            className="item-button"
+            onClick={() => handleDelete(item.id)}
+            aria-label={`Delete ${item.name}`}
+          >
+            <IconTrash color="#cc3b3b" stroke={2} aria-hidden="true" />
           </button>
         </div>
       </article>
 
       {/* Detalles del item */}
       {selectedItemId === item.id && (
-        <section className="item-details" aria-label={`Details for ${item.name}`}>
-          <hr />
-          {item.createdAt && <p>Created: {new Date(item.createdAt).toLocaleString()}</p>}
-          {item.updatedAt && <p>Updated: {new Date(item.updatedAt).toLocaleString()}</p>}
-          <p>Status: {item.completedAt === null ? 'Pending' : 'Completed'}</p>
+        <section className="item-details" aria-label={`Details for ${item.name}`} role="region">
+          <hr aria-hidden="true" />
+          {item.createdAt && (
+            <p>
+              <strong>Created:</strong> {new Date(item.createdAt).toLocaleString()}
+            </p>
+          )}
+          {item.updatedAt && (
+            <p>
+              <strong>Updated:</strong> {new Date(item.updatedAt).toLocaleString()}
+            </p>
+          )}
+          <p>
+            <strong>Status:</strong> {item.completedAt === null ? 'Pending' : 'Completed'}
+          </p>
         </section>
       )}
     </div>
