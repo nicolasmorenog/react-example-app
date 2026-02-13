@@ -10,6 +10,8 @@ A React + Vite example application showcasing various React patterns and integra
 - **Canvas Games** - Dino Game (Chrome dino clone) and Geometry Dash platformer
 - **State Management Examples** - Counter, Unicafe feedback, and anecdote voting demos
 - **Context API Demo** - Global state management using React Context
+- **Custom Hooks** - Reusable logic extraction (e.g., `useToDoList` for Supabase operations)
+- **Accessibility** - WCAG 2.1 AA compliant components with comprehensive ARIA support
 
 ## Scripts
 
@@ -52,6 +54,23 @@ A React + Vite example application showcasing various React patterns and integra
 | [prettier](https://www.npmjs.com/package/prettier) | Opinionated code formatter for consistent style. |
 | [vite](https://www.npmjs.com/package/vite) | Next-generation frontend build tool with fast HMR. |
 
+## Project Structure
+
+```
+src/
+├── components/       # Reusable UI components
+│   ├── lista-compra/
+│   ├── to-do-list-API/
+│   ├── mapa-google/
+│   └── Pagination.jsx
+├── hooks/           # Custom React hooks
+│   └── useToDoList.js
+├── pages/           # Route components
+├── context/         # React Context providers
+├── styles/          # CSS files
+└── supabaseClient.js
+```
+
 ## Tech Stack
 
 - **Framework:** React 19 + Vite 7
@@ -59,7 +78,28 @@ A React + Vite example application showcasing various React patterns and integra
 - **Styling:** Plain CSS files
 - **Backend:** Supabase
 - **Maps:** Google Maps API
+- **State Management:** React Context API + Custom Hooks
+- **Accessibility:** WCAG 2.1 AA compliance
 - **Linting:** ESLint + Prettier
+
+## Architecture Patterns
+
+### Custom Hooks
+Business logic is extracted into reusable custom hooks:
+- `useToDoList` - Encapsulates all Supabase CRUD operations, loading states, and error handling
+
+### Component Composition
+Components follow single responsibility principle:
+- Presentational components (UI only)
+- Container components (data + logic)
+- Reusable utilities (`Pagination.jsx`)
+
+### Accessibility First
+All interactive components include:
+- Semantic HTML (`<main>`, `<section>`, `<nav>`)
+- ARIA attributes (`aria-label`, `aria-pressed`, `aria-expanded`, `aria-live`)
+- Keyboard navigation support
+- Screen reader compatibility
 
 ## Getting Started
 
