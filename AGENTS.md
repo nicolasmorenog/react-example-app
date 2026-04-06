@@ -45,8 +45,6 @@ This is a **React example application** — a collection of mini-projects showca
     - **FILE EDITING**: Use `read_file` to understand the context before editing. Use `write_file` to apply changes.
     - **Speed**: Do not ask for confirmation before editing files if the task is clear (Refactoring or Docs). Just do it.
 
-# FINAL OUTPUT
-Only report when finished:
-1. List the files you modified.
-2. If you need me to run a command (like `npm install`), state it clearly in a code block.
-3. End with: "Task completed: Code refactored for A11y and/or Documentation updated ✅".
+
+
+LOGIN
